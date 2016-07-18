@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<simulatedworld>
+	<actions>
+	    <action>
+			<id>action3</id>
+			<agentID>casi_hermann_matsumbishi</agentID>
+			<actionType>GoAndStayThere</actionType>
+			<target>womensRestroom</target>
+			<actionDate>04/23/2012</actionDate>
+			<actionTime>09:00:57</actionTime>
+		</action>
+		<action>
+			<id>action1</id>
+			<agentID>casi_hermann_matsumbishi</agentID>
+			<actionType>GoAndStayThere</actionType>
+			<target>location1</target>
+			<actionDate>04/23/2012</actionDate>
+			<actionTime>09:02:00</actionTime>
+		</action>
+		<action>
+			<id>action2</id>
+			<agentID>casi_hermann_matsumbishi</agentID>
+			<actionType>GoAndStayThere</actionType>
+			<target>Pressure Sensor-->2</target>
+			<actionDate>04/23/2012</actionDate>
+			<actionTime>09:04:00</actionTime>
+		</action>
+	</actions>
+	<agents>
+		<agent>
+			<agentid>casi_hermann_matsumbishi</agentid>
+			<agentname>Hermann Matsumbishi</agentname>
+			<agentrole>teamleader</agentrole>
+			<point>180 85</point>
+		</agent>
+	</agents>
+	<rooms>
+		<room>
+			<roomid>officeHermann</roomid>
+			<wall>
+				<point>0 0</point>
+				<point>0 80</point>
+			</wall>
+			<wall>
+				<point>0 80</point>
+				<point>80 80</point>
+			</wall>
+			<wall>
+				<door>
+					<doorid>officeHermannDoor</doorid>
+					<dooroffset>20</dooroffset>
+					<doorsize>5</doorsize>
+				</door>
+				<point>80 80</point>
+				<point>80 0</point>
+			</wall>
+			<wall>
+				<point>80 0</point>
+				<point>0 0</point>
+			</wall>
+		</room>
+		<room>
+			<roomid>mainFloor</roomid>
+			<wall>
+				<point>80 0</point>
+				<point>80 80</point>
+			</wall>
+			<wall>
+				<point>80 80</point>
+				<point>80 140</point>
+			</wall>
+			<wall>
+				<point>80 140</point>
+				<point>80 200</point>
+			</wall>
+			<wall>
+				<point>80 200</point>
+				<point>80 240</point>
+			</wall>
+			<wall>
+				<point>80 240</point>
+				<point>100 240</point>
+			</wall>
+			<wall>
+				<point>100 240</point>
+				<point>130 240</point>
+			</wall>
+			<wall>
+				<point>160 240</point>
+				<point>130 240</point>
+			</wall>
+			<wall>
+				<point>160 240</point>
+				<point>160 290</point>
+			</wall>
+			<wall>
+				<point>160 290</point>
+				<point>190 320</point>
+			</wall>
+			<wall>
+				<point>190 320</point>
+				<point>220 320</point>
+			</wall>
+			<wall>
+				<point>220 320</point>
+				<point>250 290</point>
+			</wall>
+			<wall>
+				<point>250 290</point>
+				<point>250 260</point>
+			</wall>
+			<wall>
+				<point>250 190</point>
+				<point>250 260</point>
+			</wall>
+			<wall>
+				<point>250 190</point>
+				<point>250 130</point>
+			</wall>
+			<wall>
+				<point>250 130</point>
+				<point>250 100</point>
+			</wall>
+			<wall>
+				<point>250 100</point>
+				<point>250 80</point>
+			</wall>
+			<wall>
+				<point>250 80</point>
+				<point>250 0</point>
+			</wall>
+			<wall>
+				<point>250 0</point>
+				<point>80 0</point>
+			</wall>
+		</room>
+		<room>
+			<roomid>officeZwotah</roomid>
+			<wall>
+				<point>0 80</point>
+				<point>0 140</point>
+			</wall>
+			<wall>
+				<point>0 140</point>
+				<point>80 140</point>
+			</wall>
+			<wall>
+				<point>80 140</point>
+				<point>80 80</point>
+				<door>
+					<doorid>officeZwotahDoor</doorid>
+					<dooroffset>20</dooroffset>
+					<doorsize>5</doorsize>
+				</door>
+			</wall>
+			<wall>
+				<point>80 80</point>
+				<point>0 80</point>
+			</wall>
+		</room>
+		<room>
+			<roomid>officeDagobert</roomid>
+			<wall>
+				<point>0 140</point>
+				<point>0 200</point>
+			</wall>
+			<wall>
+				<point>0 200</point>
+				<point>80 200</point>
+			</wall>
+			<wall>
+				<point>80 200</point>
+				<point>80 140</point>
+				<door>
+					<doorid>officeDagobertDoor</doorid>
+					<dooroffset>20</dooroffset>
+					<doorsize>5</doorsize>
+				</door>
+			</wall>
+			<wall>
+				<point>80 140</point>
+				<point>0 140</point>
+			</wall>
+		</room>
+		<room>
+			<roomid>kitchen</roomid>
+			<wall>
+				<point>0 200</point>
+				<point>0 240</point>
+			</wall>
+			<wall>
+				<point>0 240</point>
+				<point>80 240</point>
+			</wall>
+			<wall>
+				<point>80 240</point>
+				<point>80 200</point>
+				<door>
+					<doorid>kitchen</doorid>
+					<dooroffset>20</dooroffset>
+					<doorsize>5</doorsize>
+				</door>
+			</wall>
+			<wall>
+				<point>80 200</point>
+				<point>0 200</point>
+			</wall>
+		</room>
+		<room>
+			<roomid>womensRestroom</roomid>
+			<wall>
+				<point>100 240</point>
+				<point>100 290</point>
+			</wall>
+			<wall>
+				<point>100 290</point>
+				<point>130 290</point>
+			</wall>
+			<wall>
+				<point>130 290</point>
+				<point>130 240</point>
+				<door>
+					<doorid>women-restroom-door</doorid>
+					<dooroffset>20</dooroffset>
+					<doorsize>5</doorsize>
+				</door>
+			</wall>
+			<wall>
+				<point>130 240</point>
+				<point>100 240</point>
+			</wall>
+		</room>
+		<room>
+			<roomid>mensRestroom</roomid>
+			<wall>
+				<point>160 240</point>
+				<point>130 240</point>
+				<door>
+					<doorid>mensRestroomDoor</doorid>
+					<dooroffset>20</dooroffset>
+					<doorsize>5</doorsize>
+				</door>
+			</wall>
+			<wall>
+				<point>130 240</point>
+				<point>130 290</point>
+			</wall>
+			<wall>
+				<point>130 290</point>
+				<point>160 290</point>
+			</wall>
+			<wall>
+				<point>160 290</point>
+				<point>160 240</point>
+			</wall>
+		</room>
+		<room>
+			<roomid>secretRoom</roomid>
+			<wall>
+				<point>250 290</point>
+				<point>340 290</point>
+			</wall>
+			<wall>
+				<point>340 290</point>
+				<point>340 260</point>
+			</wall>
+			<wall>
+				<point>250 260</point>
+				<point>340 260</point>
+			</wall>
+			<wall>
+				<point>250 260</point>
+				<point>250 290</point>
+			</wall>
+		</room>
+		<room>
+			<roomid>officeFelix</roomid>
+			<wall>
+				<point>340 260</point>
+				<point>250 260</point>
+			</wall>
+			<wall>
+				<point>250 260</point>
+				<point>250 190</point>
+			</wall>
+			<wall>
+				<point>250 190</point>
+				<point>340 190</point>
+				<door>
+					<doorid>officeFelixDoor</doorid>
+					<dooroffset>20</dooroffset>
+					<doorsize>5</doorsize>
+				</door>
+			</wall>
+						<wall>
+				<point>340 190</point>
+				<point>340 260</point>
+			</wall>
+			
+		</room>
+		<room>
+			<roomid>officeSusi</roomid>
+			<wall>
+				<point>340 190</point>
+				<point>250 190</point>
+			</wall>
+			<wall>
+				<point>340 190</point>
+				<point>340 130</point>
+			</wall>
+			<wall>
+				<point>340 130</point>
+				<point>250 130</point>
+			</wall>
+			<wall>
+				<point>250 130</point>
+				<point>250 190</point>
+				<door>
+					<doorid>susis-outer-door</doorid>
+					<dooroffset>20</dooroffset>
+					<doorsize>5</doorsize>
+				</door>
+			</wall>
+		</room>
+		<room>
+			<roomid></roomid>
+			<wall>
+				<point>340 130</point>
+				<point>340 100</point>
+				<door>
+					<doorid>noNameDoor1</doorid>
+					<dooroffset>10</dooroffset>
+					<doorsize>5</doorsize>
+				</door>
+			</wall>
+			<wall>
+				<point>340 100</point>
+				<point>250 100</point>
+			</wall>
+			<wall>
+				<point>250 130</point>
+				<point>250 100</point>
+			</wall>
+			<wall>
+				<point>250 130</point>
+				<point>340 130</point>
+			</wall>
+		</room>
+		<room>
+			<roomid></roomid>
+			<wall>
+				<point>340 100</point>
+				<point>340 80</point>
+			</wall>
+			<wall>
+				<point>340 80</point>
+				<point>250 80</point>
+				<door>
+					<doorid>rudis-south-door</doorid>
+					<dooroffset>80</dooroffset>
+					<doorsize>5</doorsize>
+				</door>
+			</wall>
+			<wall>
+				<point>250 100</point>
+				<point>250 80</point>
+			</wall>
+			<wall>
+				<point>250 100</point>
+				<point>340 100</point>
+			</wall>
+		</room>
+		<room>
+			<roomid>officeRudi</roomid>
+			<wall>
+				<point>340 80</point>
+				<point>340 0</point>
+			</wall>
+			<wall>
+				<point>340 0</point>
+				<point>250 0</point>
+			</wall>
+			<wall>
+				<point>250 0</point>
+				<point>250 80</point>
+				<door>
+					<doorid>rudis-west-door</doorid>
+					<dooroffset>10</dooroffset>
+					<doorsize>5</doorsize>
+				</door>
+			</wall>
+			<wall>
+				<point>250 80</point>
+				<point>340 80</point>
+			</wall>
+		</room>
+	</rooms>
+	<locations>
+		<location>
+			<id>location1</id>
+			<point>180 20</point>
+		</location>
+		<location>
+			<id>location2</id>
+			<point>45 150</point>
+		</location>
+	</locations>
+	<sensors>
+		<sensor>
+			<type>MotionSensorBinary</type>
+			<id>HeatSensor-->1</id>
+			<point>160 40</point>
+			<radius>15</radius>
+		</sensor>
+		<sensor>
+			<type>MotionSensorAnalog</type>
+			<id>HeatSensor-->2</id>
+			<point>100 40</point>
+			<radius>40</radius>
+		</sensor>
+		<sensor>
+			<type>MotionSensorAnalog</type>
+			<id>Pressure Sensor-->2</id>
+			<point>140 40</point>
+			<radius>40</radius>
+		</sensor>
+	</sensors>
+	<obstacles>
+	    <obstacle>
+	        <obstacleid>roomPbstacle1st</obstacleid>
+	        <wall>
+				<point>120 100</point>
+				<point>120 110</point>
+			</wall>
+			<wall>
+				<point>120 110</point>
+				<point>180 110</point>
+			</wall>
+			<wall>
+				<point>180 110</point>
+				<point>180 100</point>
+			</wall>
+			<wall>
+				<point>180 100</point>
+				<point>120 100</point>
+			</wall>
+	    </obstacle>
+	    <obstacle>
+	        <obstacleid>roomPbstacle</obstacleid>
+	        <wall>
+				<point>110 120</point>
+				<point>110 150</point>
+			</wall>
+			<wall>
+				<point>110 150</point>
+				<point>200 150</point>
+			</wall>
+			<wall>
+				<point>200 150</point>
+				<point>200 120</point>
+			</wall>
+			<wall>
+				<point>200 120</point>
+				<point>110 120</point>
+			</wall>
+	    </obstacle>
+	    <obstacle>
+	        <obstacleid>roomPbstacle2</obstacleid>
+	        <wall>
+				<point>90 160</point>
+				<point>90 190</point>
+			</wall>
+			<wall>
+				<point>90 190</point>
+				<point>230 190</point>
+			</wall>
+			<wall>
+				<point>230 190</point>
+				<point>230 160</point>
+			</wall>
+			<wall>
+				<point>230 160</point>
+				<point>90 160</point>
+			</wall>
+	    </obstacle>
+	</obstacles>
+</simulatedworld>

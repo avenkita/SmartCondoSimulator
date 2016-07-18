@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Walls>
+	<Wall> 
+		<Name>Bedroomwall</Name>
+		<PositionX>-0.9638305</PositionX>
+		<PositionZ>0.6506863</PositionZ>
+		<ScaleZ>6.29</ScaleZ>
+		<RotateY>0</RotateY>
+	</Wall>
+	<Wall> 
+		<Name>Diningwall</Name>
+		<PositionX>4.38617</PositionX>
+		<PositionZ>3.845686</PositionZ>
+		<ScaleZ>10.6</ScaleZ>
+		<RotateY>90</RotateY>
+	</Wall>
+	<Wall> 
+		<Name>Bathroomwall</Name>
+		<PositionX>4.38617</PositionX>
+		<PositionZ>-2.544314</PositionZ>
+		<ScaleZ>10.6</ScaleZ>
+		<RotateY>90</RotateY>
+	</Wall>
+	<Wall> 
+		<Name>Kitchenwall</Name>
+		<PositionX>9.73617</PositionX>
+		<PositionZ>0.6506863</PositionZ>
+		<ScaleZ>6.29</ScaleZ>
+		<RotateY>0</RotateY>
+	</Wall>
+</Walls>

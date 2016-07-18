@@ -1,0 +1,29 @@
+Descriptions of the XML files we have and what they consist of
+
+Walls.xml
+-Used in ReadWalls initially (not anymore)
+-Has information about the four outer walls for the SmartCondo taken directly from summer 2015 3D model
+-Has the same information for Unity transform as WallsMasterlist.xml except anything common to all the walls (for example, position in y is always the same, 1.445) were deleted
+-Is Unity-compatible
+
+WallsMasterlist.xml
+-Used in ReadWalls initially (not anymore)
+-Has information about the four outer walls for the SmartCondo taken directly from summer 2015 3D model
+-Has all nine values required for the Unity transform, regardless of if the same value is repeated for every wall
+
+simulationWorld.xml
+-Alexandr's first XML file
+-Can be used in AXMLwalls.cs to instantiate the walls (not SmartCondo walls)
+
+AXMLwallsinfo.xml
+-simulationWorld without any other tags except the wall tag
+-used in AXMLwalls previously, but now with SmartCondoWalls.cs, the foreach loops can avoid all the other tags
+
+simulationWorldSC.xml
+-Alexandr's second XMl file
+-Can be used in SmartCondoWalls.cs to instantiate SmartCondo walls and obstacles
+
+simulationWorldSCwritten.xml
+-This is the XML file that SmartCondoWalls.cs writes (in Unity-compatible form)
+-Note, the file is written into the Resources folder in Assets. When going to visual studio: Unity changed, click Reload. You may have to stop running the scene for it to show up.
+-No need to delete the file before running the scene again, it will automatically update it (with the same directory path)
