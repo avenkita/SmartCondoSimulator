@@ -2,10 +2,10 @@
 using System.Collections;
 
 
-//A class that goes along with makesensors.cs
+//A class that goes along with CompileSensors.cs
 
 
-public class Sensorclass
+public class SensorClass
 {
     public float xcoord { get; set; }
     public float ycoord { get; set; }

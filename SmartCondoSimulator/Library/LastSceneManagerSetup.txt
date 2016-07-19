@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/AXMLrun.unity
+- path: Assets/InstantiateSC.unity
   isLoaded: 1
   isActive: 1

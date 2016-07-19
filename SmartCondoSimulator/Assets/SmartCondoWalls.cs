@@ -22,12 +22,13 @@ public class SmartCondoWalls : MonoBehaviour
         GameObject mycube = Resources.Load("Wallprefab") as GameObject;
         XmlTextWriter writer = new XmlTextWriter("C:\\Users\\Aishwarya\\Desktop\\SmartCondo\\SmartCondoSimulator\\SmartCondoSimulator\\Assets\\Resources\\simulationWorldSCwritten.xml", Encoding.UTF8);
         //XmlWriter writer = XmlWriter.Create("C:\\Users\\Aishwarya\\Desktop\\SmartCondo\\SmartCondo2D\\simulationWorldSCwritten.xml", Encoding.UTF8);
-       // writer.WriteRaw("<?xml version=\"1.0\" encoding=\"UTF - 8\" standalone=\"no\"?> \n");
+        // writer.WriteRaw("<?xml version=\"1.0\" encoding=\"UTF - 8\" standalone=\"no\"?> \n");
         writer.WriteStartElement("Walls");
         GameObject empty = new GameObject("SC"); //********
         for (int wallnumber = 0; wallnumber < WallsList.Count; wallnumber++)
         {
             var cw = WallsList[wallnumber];
+        //    if (cw == null) { continue; }
             GameObject go = Instantiate(mycube) as GameObject;
             go.transform.parent = empty.transform; //********
             float xposition = (cw.Xcoord1 + cw.Xcoord2) / 2;
@@ -48,9 +49,10 @@ public class SmartCondoWalls : MonoBehaviour
             else
             {
                 if (xscale == 0)
-                {   xscale = zscale;
+                {
+                    xscale = zscale;
                     zscale = 1f; //********
-                   // go.transform.Rotate(0f, 90f, 0f);
+                                 // go.transform.Rotate(0f, 90f, 0f);
                     angle = 90;
                 }
                 //if (zscale == 0)
@@ -77,7 +79,7 @@ public class SmartCondoWalls : MonoBehaviour
             cw.ScaleY = "2.573039";
             cw.ScaleZ = zscale.ToString();
             cw.RotateX = "0";
-            cw.RotateY = angle.ToString(); 
+            cw.RotateY = angle.ToString();
             cw.RotateZ = "0";
 
             //Debug.Log(cw.PositionX);
@@ -96,11 +98,11 @@ public class SmartCondoWalls : MonoBehaviour
             writer.WriteStartElement("RotateY"); writer.WriteString(cw.RotateY); writer.WriteEndElement();
             writer.WriteStartElement("RotateZ"); writer.WriteString(cw.RotateZ); writer.WriteEndElement();
             writer.WriteEndElement();
-            
+
         }
         writer.WriteEndElement();
         writer.Close();
-        
+
     }
 
 
@@ -127,26 +129,23 @@ public class SmartCondoWalls : MonoBehaviour
                         if (transformItems3.Name == "roomid" || transformItems3.Name == "obstacleid") { continue; }
                         XmlNodeList transformcontent4 = transformItems3.ChildNodes; //gets the tags inside the wall tag (point and door)
                         SCWalls wallsimulation = new SCWalls();
-                        foreach (XmlNode transformItems4 in transformcontent4) 
+                        foreach (XmlNode transformItems4 in transformcontent4)
                         {
-                            if (transformItems4.Name == "door") { continue; } // disregard the door tag 
-                            if ((varflag == false) && (transformItems4.Name == "point"))
-                            {
+                           if ((varflag == false) && (transformItems4.Name == "point"))
+                                {
                                 XmlNodeList transformcontent5 = transformItems4.ChildNodes; //gets the tags inside point tag (xcoord and ycoord)
                                 foreach (XmlNode transformItems5 in transformcontent5)
                                 {
                                     if (transformItems5.Name == "xcoord")
                                     {
-                                        wallsimulation.Zcoord1 = float.Parse(transformItems5.InnerText) /**0.009f*/; //********
-                                     //   Debug.Log(wallsimulation.Zcoord1);
+                                        wallsimulation.Zcoord1 = float.Parse(transformItems5.InnerText);
                                     }
                                     if (transformItems5.Name == "ycoord")
                                     {
-                                        wallsimulation.Xcoord1 = float.Parse(transformItems5.InnerText) /**0.009f*/; //********
-                                     //   Debug.Log(wallsimulation.Xcoord1);
+                                        wallsimulation.Xcoord1 = float.Parse(transformItems5.InnerText);
                                     }
                                 }
-                            }
+                                }
                             if ((varflag == true) && (transformItems4.Name == "point"))
                             {
                                 XmlNodeList transformcontent5 = transformItems4.ChildNodes; //gets the tags inside point tag (xcoord and ycoord)
@@ -154,17 +153,16 @@ public class SmartCondoWalls : MonoBehaviour
                                 {
                                     if (transformItems5.Name == "xcoord")
                                     {
-                                        wallsimulation.Zcoord2 = float.Parse(transformItems5.InnerText) /**0.009f*/; //********
-                                     //   Debug.Log(wallsimulation.Zcoord2);
+                                        wallsimulation.Zcoord2 = float.Parse(transformItems5.InnerText);
                                     }
                                     if (transformItems5.Name == "ycoord")
                                     {
-                                        wallsimulation.Xcoord2 = float.Parse(transformItems5.InnerText) /**0.009f*/; //********
-                                     //   Debug.Log(wallsimulation.Xcoord2);
+                                        wallsimulation.Xcoord2 = float.Parse(transformItems5.InnerText);
                                     }
                                 }
                             }
                             varflag = !varflag;
+                      //      if (transformItems4.Name == "door") { wallsimulation = null; }
                         }
                         ListofWalls.Add(wallsimulation);
                     }
