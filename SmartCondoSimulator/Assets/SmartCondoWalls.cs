@@ -28,7 +28,7 @@ public class SmartCondoWalls : MonoBehaviour
         for (int wallnumber = 0; wallnumber < WallsList.Count; wallnumber++)
         {
             var cw = WallsList[wallnumber];
-        //    if (cw == null) { continue; }
+            if (cw == null) { continue; }
             GameObject go = Instantiate(mycube) as GameObject;
             go.transform.parent = empty.transform; //********
             float xposition = (cw.Xcoord1 + cw.Xcoord2) / 2;
@@ -162,7 +162,7 @@ public class SmartCondoWalls : MonoBehaviour
                                 }
                             }
                             varflag = !varflag;
-                      //      if (transformItems4.Name == "door") { wallsimulation = null; }
+                            if (transformItems4.Name == "door") { wallsimulation = null; }
                         }
                         ListofWalls.Add(wallsimulation);
                     }

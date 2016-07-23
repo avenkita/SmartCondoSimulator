@@ -18,10 +18,13 @@ public class ReadSensors : MonoBehaviour
         InstantiateSensors(mysensor, SensorList);
     }
 
+   
 
     public static void InstantiateSensors(GameObject sensorprefab, List<SensorClass> SensorList)
     {
         GameObject emptys = new GameObject("Sensors");
+     //   Material mymat = (Material)Resources.Load("purplemat.mat");
+      //  Shader myshader = (Shader)Resources.Load("blue.mat");
         for (int sensorcount = 0; sensorcount < SensorList.Count; sensorcount++)
         {
             var csensor = SensorList[sensorcount];
@@ -30,6 +33,9 @@ public class ReadSensors : MonoBehaviour
             go.transform.position = new Vector3(csensor.PositionX, csensor.PositionY, csensor.PositionZ);
             go.transform.localScale = new Vector3(csensor.ScaleX, csensor.ScaleY, csensor.ScaleZ);
             go.name = csensor.sensorid;
+            go.tag = "sensor";
+       //     go.GetComponent<Renderer>().material = mymat;
+       //     go.GetComponent<Renderer>().material.shader = myshader;
         }
     }
 
@@ -52,7 +58,7 @@ public class ReadSensors : MonoBehaviour
                 SensorClass thissensor = new SensorClass();
                 foreach (XmlNode transformItems2 in transformcontent2)
                 {
-                    Debug.Log(transformItems2.InnerText);
+              //      Debug.Log(transformItems2.InnerText);
                     if (transformItems2.Name == "Name") { thissensor.sensorid = transformItems2.InnerText; }
                     if (transformItems2.Name == "PositionX") { thissensor.PositionX = float.Parse(transformItems2.InnerText); }
                     if (transformItems2.Name == "PositionY") { thissensor.PositionY = float.Parse(transformItems2.InnerText); }

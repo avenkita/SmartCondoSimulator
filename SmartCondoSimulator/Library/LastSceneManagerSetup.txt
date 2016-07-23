@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/InstantiateSC.unity
+- path: Assets/MCLspace.unity
   isLoaded: 1
   isActive: 1

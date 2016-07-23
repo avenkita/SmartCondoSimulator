@@ -12,14 +12,14 @@ public class ReadWalls : MonoBehaviour {
 
     void Start() {
         List<Wall> WallsList = getWalls();
-
+        GameObject empty = new GameObject("Walls");
         GameObject mycube = Resources.Load("Wallprefab") as GameObject;
         for (int wallnumber = 0; wallnumber < WallsList.Count; wallnumber++) {
             var cwall = WallsList[wallnumber];
             GameObject go = Instantiate(mycube) as GameObject;
+            go.transform.parent = empty.transform;
             go.transform.position = new Vector3(cwall.PositionX, cwall.PositionY, cwall.PositionZ);
             go.transform.localScale = new Vector3(cwall.ScaleX, cwall.ScaleY, cwall.ScaleZ);
-           // Debug.Log(cwall.RotateY);
             go.transform.Rotate(cwall.RotateX, cwall.RotateY, cwall.RotateZ);
             go.name = cwall.Name;
         }
@@ -35,11 +35,9 @@ public class ReadWalls : MonoBehaviour {
         
         foreach (XmlNode transformInfo in transformList)
         {
-            
             XmlNodeList transformcontent = transformInfo.ChildNodes;
             foreach (XmlNode transformItems in transformcontent)
             {
-               
                 XmlNodeList transformcontent2 = transformItems.ChildNodes;
                 Wall w = new Wall();
                 foreach (XmlNode transformItems2 in transformcontent2)
@@ -68,5 +66,4 @@ public class ReadWalls : MonoBehaviour {
         return ListofWalls;
     }
 
-    void Update() { }
 }

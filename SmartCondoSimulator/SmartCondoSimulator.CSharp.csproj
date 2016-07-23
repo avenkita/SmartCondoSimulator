@@ -66,11 +66,14 @@
     <Compile Include="Assets\AXML.cs" />
     <Compile Include="Assets\AXMLReadWalls.cs" />
     <Compile Include="Assets\CompileDoors.cs" />
+    <Compile Include="Assets\CompileMCL.cs" />
     <Compile Include="Assets\CompileSensors.cs" />
     <Compile Include="Assets\DoorClass.cs" />
     <Compile Include="Assets\Practice\Destroythis.cs" />
     <Compile Include="Assets\Practice\Printingscript.cs" />
     <Compile Include="Assets\Practice\Sensors.cs" />
+    <Compile Include="Assets\ReadDoors.cs" />
+    <Compile Include="Assets\ReadMCL.cs" />
     <Compile Include="Assets\ReadSensors.cs" />
     <Compile Include="Assets\ReadWalls.cs" />
     <Compile Include="Assets\Resources\Wall.cs" />
@@ -81,6 +84,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\AXMLwallsinfo.xml" />
+    <None Include="Assets\Resources\MCLspaceUnity.xml" />
+    <None Include="Assets\Resources\MCLyellow.xml" />
     <None Include="Assets\Resources\Walls.xml" />
     <None Include="Assets\Resources\WallsMasterlist.xml" />
     <None Include="Assets\Resources\doorlist.xml" />
