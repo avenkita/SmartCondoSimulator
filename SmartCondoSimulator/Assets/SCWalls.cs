@@ -7,6 +7,7 @@ using System.Collections;
 
 public class SCWalls
 {
+    public string roomid { set; get; }
     public float Xcoord1 { set; get; }
     public float Zcoord1 { set; get; }
     public float Xcoord2 { set; get; }

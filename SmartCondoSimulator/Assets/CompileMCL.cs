@@ -44,7 +44,7 @@ public class CompileMCL : MonoBehaviour {
                 else { zscale = 0.1f; angle = 0; }
             }
 
-            cw.Name = (wallnumber + 1).ToString();
+          cw.Name = (wallnumber + 1).ToString();
             cw.PositionX = xposition.ToString();
             cw.PositionY = "1.445";
             cw.PositionZ = zposition.ToString();
@@ -57,6 +57,7 @@ public class CompileMCL : MonoBehaviour {
             
             writer.WriteStartElement("Wall");
             writer.WriteStartElement("Name"); writer.WriteString(cw.Name); writer.WriteEndElement();
+            writer.WriteStartElement("RoomName"); writer.WriteString(cw.roomid); writer.WriteEndElement();
             writer.WriteStartElement("PositionX"); writer.WriteString(cw.PositionX); writer.WriteEndElement();
             writer.WriteStartElement("PositionY"); writer.WriteString(cw.PositionY); writer.WriteEndElement();
             writer.WriteStartElement("PositionZ"); writer.WriteString(cw.PositionZ); writer.WriteEndElement();
@@ -76,6 +77,7 @@ public class CompileMCL : MonoBehaviour {
     public static void ReadWallsAXML()
     {
         bool varflag = false;
+        string roomid = " ";
         TextAsset textXML = (TextAsset)Resources.Load("MCLyellow", typeof(TextAsset));
         XmlDocument xml = new XmlDocument();
         xml.LoadXml(textXML.text);
@@ -93,7 +95,7 @@ public class CompileMCL : MonoBehaviour {
                     foreach (XmlNode transformItems3 in transformcontent3)
                     {
                         XmlNodeList transformcontent4 = transformItems3.ChildNodes; //gets the tags inside the wall tag (point and door)
-                        if (transformItems3.Name == "roomid") { continue; }
+                        if (transformItems3.Name == "roomid") { roomid = transformItems3.InnerText; continue; }
                         SCWalls wallsimulation = new SCWalls();
                         foreach (XmlNode transformItems4 in transformcontent4)
                         {
@@ -117,6 +119,7 @@ public class CompileMCL : MonoBehaviour {
                             }
                             varflag = !varflag;
                         }
+                        wallsimulation.roomid = roomid;
                         ListofWalls.Add(wallsimulation);
                     }
                 }

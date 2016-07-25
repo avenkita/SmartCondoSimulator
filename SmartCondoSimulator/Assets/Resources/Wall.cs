@@ -16,6 +16,7 @@ public class Wall
     public float RotateX { set; get; }
     public float RotateY { set; get; }
     public float RotateZ { set; get; }
+    public string roomid { set; get; }
 
 
  //   public float SwitchRotationY { set; get; }
