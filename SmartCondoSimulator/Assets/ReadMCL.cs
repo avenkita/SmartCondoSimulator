@@ -13,7 +13,7 @@ public class ReadMCL : MonoBehaviour {
         List<Wall> WallsList = getWalls();
 
         GameObject mycube = Resources.Load("Wallprefab") as GameObject;
-        
+        string roomfind = " ";
         for (int wallnumber = 0; wallnumber < WallsList.Count; wallnumber++)
         {
             var cwall = WallsList[wallnumber];
@@ -23,8 +23,21 @@ public class ReadMCL : MonoBehaviour {
             go.transform.Rotate(cwall.RotateX, cwall.RotateY, cwall.RotateZ);
             go.name = cwall.Name;
             go.tag = cwall.roomid;
+            string oldroomfind = roomfind;
+            roomfind = cwall.roomid;
+            
+            if (oldroomfind != roomfind)
+            {
+                GameObject roomparent = new GameObject(roomfind);
+                go.transform.parent = roomparent.transform;
+            }
+            else
+            {
+                go.transform.parent = GameObject.Find(oldroomfind).transform;
+            }
         }
 
+        /*
         #region parenting
 
         GameObject[] cp = GameObject.FindGameObjectsWithTag("Client Preparation Room");
@@ -55,12 +68,15 @@ public class ReadMCL : MonoBehaviour {
         //could also use if statement within the forloop maybe?
         //for the FindGameObjectWithTag function, must all gameobjects be tagged? Can't leave them untagged?
 
+    */
+
     }
 
 
     public static void ReadWallsXML()
     {
-        TextAsset textXML = (TextAsset)Resources.Load("MCLspaceUnity", typeof(TextAsset));
+       // TextAsset textXML = (TextAsset)Resources.Load("MCLspaceUnity", typeof(TextAsset));
+        TextAsset textXML = (TextAsset)Resources.Load("secondfloor", typeof(TextAsset));
         XmlDocument xmldoc = new XmlDocument();
         xmldoc.LoadXml(textXML.text);
         XmlNodeList transformList = xmldoc.GetElementsByTagName("Walls");

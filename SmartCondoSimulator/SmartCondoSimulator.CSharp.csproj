@@ -69,6 +69,7 @@
     <Compile Include="Assets\CompileMCL.cs" />
     <Compile Include="Assets\CompileSensors.cs" />
     <Compile Include="Assets\DoorClass.cs" />
+    <Compile Include="Assets\DoorWallClass.cs" />
     <Compile Include="Assets\Practice\Destroythis.cs" />
     <Compile Include="Assets\Practice\Printingscript.cs" />
     <Compile Include="Assets\Practice\Sensors.cs" />
@@ -89,6 +90,10 @@
     <None Include="Assets\Resources\Walls.xml" />
     <None Include="Assets\Resources\WallsMasterlist.xml" />
     <None Include="Assets\Resources\doorlist.xml" />
+    <None Include="Assets\Resources\doorlist2.xml" />
+    <None Include="Assets\Resources\secondFloor2.xml" />
+    <None Include="Assets\Resources\secondFloorOBS.xml" />
+    <None Include="Assets\Resources\secondfloor.xml" />
     <None Include="Assets\Resources\sensorlist.xml" />
     <None Include="Assets\Resources\simulationWorld.xml" />
     <None Include="Assets\Resources\simulationWorldSC.xml" />

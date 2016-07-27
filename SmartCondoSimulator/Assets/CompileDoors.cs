@@ -38,6 +38,7 @@ public class CompileDoors : MonoBehaviour
     {
         XmlTextWriter writer = new XmlTextWriter("C:\\Users\\Aishwarya\\Desktop\\SmartCondoSimulator\\SmartCondoSimulator\\SmartCondoSimulator\\Assets\\Resources\\doorlist.xml", Encoding.UTF8);
         writer.Formatting = Formatting.Indented;
+        writer.WriteStartElement("Environment");
 
         GameObject mycube = Resources.Load("Wallprefab") as GameObject;
         GameObject empty = new GameObject("Doors");
@@ -45,11 +46,13 @@ public class CompileDoors : MonoBehaviour
 
 
         List<DoorClass> WallsList = getWalls();
-
+        
         writer.WriteStartElement("Doors");
         for (int doornumber = 0; doornumber < WallsList.Count; doornumber++)
         {
             var dw = WallsList[doornumber];
+
+            Debug.Log(dw.PositionXd);
 
          //   if (dw.doorid == null) { continue; }
             GameObject go = Instantiate(mycube) as GameObject;
@@ -73,9 +76,9 @@ public class CompileDoors : MonoBehaviour
         writer.WriteEndElement();
 
         writer.WriteStartElement("Walls");
-        for (int doornumber = 0; doornumber < WallsList.Count; doornumber++)
+        for (int count = 0; count < WallsList.Count; count++)
         {
-            var dw = WallsList[doornumber];
+            var dw = WallsList[count];
 
             GameObject Wall1 = Instantiate(mycube) as GameObject;
             Wall1.transform.parent = emptyw.transform;
@@ -85,13 +88,14 @@ public class CompileDoors : MonoBehaviour
             GameObject Wall2 = Instantiate(mycube) as GameObject;
             Wall2.transform.parent = emptyw.transform;
             Wall2.transform.position = new Vector3(dw.PositionXw2, 80, dw.PositionZw2);
-            Wall2.transform.localScale = new Vector3(dw.ScaleXw2, 160, dw.ScaleZw2);
+            Wall2.transform.localScale = new Vector3(dw.ScaleXw2, 160, dw.ScaleZw2); 
 
             writer.WriteStartElement("Wall");
             writer.WriteStartElement("PositionX"); writer.WriteString(dw.PositionXw1.ToString()); writer.WriteEndElement();
             writer.WriteStartElement("PositionY"); writer.WriteString("80"); writer.WriteEndElement();
             writer.WriteStartElement("PositionZ"); writer.WriteString(dw.PositionZw1.ToString()); writer.WriteEndElement();
             writer.WriteStartElement("ScaleX"); writer.WriteString(dw.ScaleXw1.ToString()); writer.WriteEndElement();
+            Debug.Log(dw.PositionXw1);
             writer.WriteStartElement("ScaleY"); writer.WriteString("160"); writer.WriteEndElement();
             writer.WriteStartElement("ScaleZ"); writer.WriteString(dw.ScaleZw1.ToString()); writer.WriteEndElement();
             writer.WriteEndElement();
@@ -100,11 +104,14 @@ public class CompileDoors : MonoBehaviour
             writer.WriteStartElement("PositionX"); writer.WriteString(dw.PositionXw2.ToString()); writer.WriteEndElement();
             writer.WriteStartElement("PositionY"); writer.WriteString("80"); writer.WriteEndElement();
             writer.WriteStartElement("PositionZ"); writer.WriteString(dw.PositionZw2.ToString()); writer.WriteEndElement();
+            Debug.Log(dw.PositionXw2);
             writer.WriteStartElement("ScaleX"); writer.WriteString(dw.ScaleXw2.ToString()); writer.WriteEndElement();
             writer.WriteStartElement("ScaleY"); writer.WriteString("160"); writer.WriteEndElement();
             writer.WriteStartElement("ScaleZ"); writer.WriteString(dw.ScaleZw2.ToString()); writer.WriteEndElement();
             writer.WriteEndElement();
         }
+        writer.WriteEndElement();
+
         writer.WriteEndElement();
     }
 
@@ -160,7 +167,6 @@ public class CompileDoors : MonoBehaviour
                             {
                                 DoorClass dw = new DoorClass();
                                 XmlNodeList transformcontent5 = transformItems4.ChildNodes; //gets the tags inside point tag (xcoord and ycoord)
-
                                 foreach (XmlNode transformItems5 in transformcontent5)
                                 {
                                     if (transformItems5.Name == "doorid") { dw.doorid = transformItems5.InnerText; }
@@ -216,7 +222,6 @@ public class CompileDoors : MonoBehaviour
                                         dw.PositionZw2 = (zc1 + doorend2) / 2;
                                         dw.ScaleZw2 = Mathf.Abs(zc1 - doorend2);
                                     }
-
                                 }
                                 else { dw.PositionZd = zc1; dw.PositionZw1 = zc1; dw.PositionZw2 = zc1; dw.ScaleZd = 1; dw.ScaleZw1 = 1; dw.ScaleZw2 = 1; }
 

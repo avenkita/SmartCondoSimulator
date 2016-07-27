@@ -72,7 +72,7 @@ public class SmartCondoWalls : MonoBehaviour
             //float angleY = angle + 360f - (2* angle);
 
             cw.Name = wallnumber.ToString();
-            cw.PositionX = xposition.ToString(); Debug.Log(cw.PositionX);
+            cw.PositionX = xposition.ToString(); //Debug.Log(cw.PositionX);
             cw.PositionY = "1.445";
             cw.PositionZ = zposition.ToString();
             cw.ScaleX = xscale.ToString();

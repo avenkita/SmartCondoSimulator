@@ -5,15 +5,25 @@ using System.Xml;
 
 public class ReadDoors : MonoBehaviour
 {
-    /*
+   
     public static List<DoorClass> ListofDoors = new List<DoorClass>();
     public static List<Wall> ListofWalls = new List<Wall>();
 
     void Start()
     //gets the list of doors, loads a prefab and calls function to instantiate doors
     {
-        List<DoorClass> DoorList = getDoors().Item1;
-        List<Wall> WallsList = getDoors().Item2;
+        object[] thisarray = getDoors();
+
+        //TYPECASTING
+        object doors = thisarray[0];
+        List<DoorClass> DoorList;
+        DoorList = (List<DoorClass>)doors;
+
+        object walls = thisarray[1];
+        List<Wall> WallsList;
+        WallsList = (List<Wall>)walls;
+
+
         GameObject mycube = Resources.Load("Wallprefab") as GameObject;
         InstantiateDoors(mycube, DoorList);
         InstantiateWalls(mycube, WallsList);
@@ -70,7 +80,7 @@ public class ReadDoors : MonoBehaviour
                         XmlNodeList transformcontent2 = transformItems.ChildNodes;
                         foreach (XmlNode transformItems2 in transformcontent2)
                         {
-                            Debug.Log(transformItems2.InnerText);
+                          //  Debug.Log(transformItems2.InnerText);
                             if (transformItems2.Name == "Name") { thisdoor.doorid = transformItems2.InnerText; }
                             if (transformItems2.Name == "PositionX") { thisdoor.PositionXd = float.Parse(transformItems2.InnerText); }
                             if (transformItems2.Name == "PositionY") { thisdoor.PositionYd = float.Parse(transformItems2.InnerText); }
@@ -94,7 +104,7 @@ public class ReadDoors : MonoBehaviour
                         Wall thiswall = new Wall();
                         foreach (XmlNode transformItems2 in transformcontent2)
                         {
-                            Debug.Log(transformItems2.InnerText);
+                         //   Debug.Log(transformItems2.InnerText);
                             if (transformItems2.Name == "PositionX") { thiswall.PositionX = float.Parse(transformItems2.InnerText); }
                             if (transformItems2.Name == "PositionY") { thiswall.PositionY = float.Parse(transformItems2.InnerText); }
                             if (transformItems2.Name == "PositionZ") { thiswall.PositionZ = float.Parse(transformItems2.InnerText); }
@@ -109,13 +119,13 @@ public class ReadDoors : MonoBehaviour
         }
     }
 
-    public static Tuple<List<DoorClass>, List<Wall>> getDoors()
+    public static object[] getDoors()
     {
         ReadDoorsXML();
-        Tuple<List<DoorClass>, List<Wall>> tuple = new Tuple<List<DoorClass>, List<Wall>>(ListofDoors, ListofWalls);
-        return tuple;
+        object[] wallsdoorslist = { ListofDoors, ListofWalls };
+        return wallsdoorslist;
     }
-    */
+    
 
 }
 

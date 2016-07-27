@@ -16,8 +16,9 @@ public class CompileMCL : MonoBehaviour {
     {
         List<SCWalls> WallsList = getWalls();
 
-        GameObject mycube = Resources.Load("Wallprefab") as GameObject;
-        XmlTextWriter writer = new XmlTextWriter("C:\\Users\\Aishwarya\\Desktop\\SmartCondoSimulator\\SmartCondoSimulator\\SmartCondoSimulator\\Assets\\Resources\\MCLspaceUnity.xml", Encoding.UTF8);
+    //    GameObject mycube = Resources.Load("Wallprefab") as GameObject;
+        XmlTextWriter writer = new XmlTextWriter("C:\\Users\\Aishwarya\\Desktop\\SmartCondoSimulator\\SmartCondoSimulator\\SmartCondoSimulator\\Assets\\Resources\\secondfloor.xml", Encoding.UTF8);
+     //   XmlTextWriter writer = new XmlTextWriter("C:\\Users\\Aishwarya\\Desktop\\SmartCondoSimulator\\SmartCondoSimulator\\SmartCondoSimulator\\Assets\\Resources\\MCLspaceUnity.xml", Encoding.UTF8);
         writer.Formatting = Formatting.Indented;
         writer.WriteStartElement("Walls");
 
@@ -36,20 +37,23 @@ public class CompileMCL : MonoBehaviour {
                 angle = Mathf.Atan((cw.Zcoord1 - cw.Zcoord2) / (cw.Xcoord1 - cw.Xcoord2)) * 180 / Mathf.PI;
                 angle = -angle + 360;
                 xscale = length;
-                zscale = 0.1f;
+                //   zscale = 0.1f;
+                zscale = 1f;
             }
             else
             {
-                if (xscale == 0) { xscale = zscale; zscale = 0.1f; angle = 90; }
-                else { zscale = 0.1f; angle = 0; }
+                if (xscale == 0) { xscale = zscale; zscale = /*0.1*/1f; angle = 90; }
+                else { zscale = /*0.1*/1f; angle = 0; }
             }
 
           cw.Name = (wallnumber + 1).ToString();
             cw.PositionX = xposition.ToString();
-            cw.PositionY = "1.445";
+            //cw.PositionY = "1.445";
+            cw.PositionY = "20";
             cw.PositionZ = zposition.ToString();
             cw.ScaleX = xscale.ToString();
-            cw.ScaleY = "2.573039";
+            //cw.ScaleY = "2.573039";
+            cw.ScaleY = "40";
             cw.ScaleZ = zscale.ToString();
             cw.RotateX = "0";
             cw.RotateY = angle.ToString();
@@ -78,7 +82,9 @@ public class CompileMCL : MonoBehaviour {
     {
         bool varflag = false;
         string roomid = " ";
-        TextAsset textXML = (TextAsset)Resources.Load("MCLyellow", typeof(TextAsset));
+      //  string obstacleid = " ";
+      //  TextAsset textXML = (TextAsset)Resources.Load("MCLyellow", typeof(TextAsset));
+        TextAsset textXML = (TextAsset)Resources.Load("secondFloor2", typeof(TextAsset));
         XmlDocument xml = new XmlDocument();
         xml.LoadXml(textXML.text);
         XmlNodeList transformList = xml.GetElementsByTagName("simulatedworld"); 
@@ -88,6 +94,7 @@ public class CompileMCL : MonoBehaviour {
             XmlNodeList transformcontent = transformInfo.ChildNodes; //gets the tags inside the simulatedworld tag (rooms)
             foreach (XmlNode transformItems in transformcontent)
             {
+                if (transformItems.Name != "rooms" /* || transformItems.Name != "obstacles"*/) { continue; }
                 XmlNodeList transformcontent2 = transformItems.ChildNodes; //gets the tags inside the rooms tag (room)
                 foreach (XmlNode transformItems2 in transformcontent2)
                 {
@@ -96,6 +103,7 @@ public class CompileMCL : MonoBehaviour {
                     {
                         XmlNodeList transformcontent4 = transformItems3.ChildNodes; //gets the tags inside the wall tag (point and door)
                         if (transformItems3.Name == "roomid") { roomid = transformItems3.InnerText; continue; }
+                     //   if (transformItems3.Name == "obstacleid") { continue; }
                         SCWalls wallsimulation = new SCWalls();
                         foreach (XmlNode transformItems4 in transformcontent4)
                         {
@@ -104,8 +112,8 @@ public class CompileMCL : MonoBehaviour {
                                 XmlNodeList transformcontent5 = transformItems4.ChildNodes; //gets the tags inside point tag (xcoord and ycoord)
                                 foreach (XmlNode transformItems5 in transformcontent5)
                                 {
-                                    if (transformItems5.Name == "xcoord") { wallsimulation.Xcoord1 = float.Parse(transformItems5.InnerText); }
-                                    if (transformItems5.Name == "ycoord") { wallsimulation.Zcoord1 = float.Parse(transformItems5.InnerText); }
+                                    if (transformItems5.Name == "xcoord") { wallsimulation.Zcoord1/*wallsimulation.Xcoord1*/ = float.Parse(transformItems5.InnerText); }
+                                    if (transformItems5.Name == "ycoord") { wallsimulation.Xcoord1/*wallsimulation.Zcoord1*/ = float.Parse(transformItems5.InnerText); }
                                 }
                             }
                             if ((varflag == true) && (transformItems4.Name == "point"))
@@ -113,13 +121,15 @@ public class CompileMCL : MonoBehaviour {
                                 XmlNodeList transformcontent5 = transformItems4.ChildNodes; //gets the tags inside point tag (xcoord and ycoord)
                                 foreach (XmlNode transformItems5 in transformcontent5)
                                 {
-                                    if (transformItems5.Name == "xcoord") { wallsimulation.Xcoord2 = float.Parse(transformItems5.InnerText); }
-                                    if (transformItems5.Name == "ycoord") { wallsimulation.Zcoord2 = float.Parse(transformItems5.InnerText); }
+                                    if (transformItems5.Name == "xcoord") { wallsimulation.Zcoord2/*wallsimulation.Xcoord2*/ = float.Parse(transformItems5.InnerText); }
+                                    if (transformItems5.Name == "ycoord") { wallsimulation.Xcoord2/*wallsimulation.Zcoord2*/ = float.Parse(transformItems5.InnerText); }
                                 }
                             }
                             varflag = !varflag;
+                            if (transformItems4.Name == "door") { continue; }
                         }
                         wallsimulation.roomid = roomid;
+                     //   walls obstacleid?
                         ListofWalls.Add(wallsimulation);
                     }
                 }
