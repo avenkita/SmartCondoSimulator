@@ -3,6 +3,7 @@ using System.Collections;
 
 
 //Class that goes along with SmartCondoWalls.cs
+//Has fields meant for reading XML with xcoord and ycoord tags
 
 
 public class SCWalls

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//A class which goes along with CompileDoors.cs and ReadDoors.cs
+//Can hold information about the transform for a door, and the two walls which surround it
+
 public class DoorClass {
 
     public string doorid { get; set; }

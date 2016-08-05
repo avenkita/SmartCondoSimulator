@@ -66,34 +66,25 @@
     <Compile Include="Assets\AXML.cs" />
     <Compile Include="Assets\AXMLReadWalls.cs" />
     <Compile Include="Assets\CompileDoors.cs" />
-    <Compile Include="Assets\CompileMCL.cs" />
     <Compile Include="Assets\CompileSensors.cs" />
     <Compile Include="Assets\DoorClass.cs" />
-    <Compile Include="Assets\DoorWallClass.cs" />
     <Compile Include="Assets\Practice\Destroythis.cs" />
     <Compile Include="Assets\Practice\Printingscript.cs" />
     <Compile Include="Assets\Practice\Sensors.cs" />
     <Compile Include="Assets\ReadDoors.cs" />
-    <Compile Include="Assets\ReadMCL.cs" />
     <Compile Include="Assets\ReadSensors.cs" />
     <Compile Include="Assets\ReadWalls.cs" />
-    <Compile Include="Assets\Resources\Wall.cs" />
     <Compile Include="Assets\SCWalls.cs" />
     <Compile Include="Assets\SensorClass.cs" />
     <Compile Include="Assets\SmartCondo.cs" />
     <Compile Include="Assets\SmartCondoWalls.cs" />
+    <Compile Include="Assets\Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\AXMLwallsinfo.xml" />
-    <None Include="Assets\Resources\MCLspaceUnity.xml" />
-    <None Include="Assets\Resources\MCLyellow.xml" />
     <None Include="Assets\Resources\Walls.xml" />
     <None Include="Assets\Resources\WallsMasterlist.xml" />
     <None Include="Assets\Resources\doorlist.xml" />
-    <None Include="Assets\Resources\doorlist2.xml" />
-    <None Include="Assets\Resources\secondFloor2.xml" />
-    <None Include="Assets\Resources\secondFloorOBS.xml" />
-    <None Include="Assets\Resources\secondfloor.xml" />
     <None Include="Assets\Resources\sensorlist.xml" />
     <None Include="Assets\Resources\simulationWorld.xml" />
     <None Include="Assets\Resources\simulationWorldSC.xml" />

@@ -8,6 +8,7 @@ using System.Xml;
 
 public class ReadSensors : MonoBehaviour
 {
+    //initializes a list of SensorClass type
     public static List<SensorClass> ListofSensors = new List<SensorClass>();
 
     void Start()
@@ -19,46 +20,41 @@ public class ReadSensors : MonoBehaviour
     }
 
    
-
+    //function InstantiateSensors has arguments of the prefab and the list of sensors, and instantiates the sensors in the list
     public static void InstantiateSensors(GameObject sensorprefab, List<SensorClass> SensorList)
     {
         GameObject emptys = new GameObject("Sensors");
-     //   Material mymat = (Material)Resources.Load("purplemat.mat");
-      //  Shader myshader = (Shader)Resources.Load("blue.mat");
         for (int sensorcount = 0; sensorcount < SensorList.Count; sensorcount++)
         {
             var csensor = SensorList[sensorcount];
             GameObject go = Instantiate(sensorprefab) as GameObject;
-            go.transform.parent = emptys.transform;
+            go.transform.parent = emptys.transform; //all sensors parented under "Sensors" GameObject
             go.transform.position = new Vector3(csensor.PositionX, csensor.PositionY, csensor.PositionZ);
             go.transform.localScale = new Vector3(csensor.ScaleX, csensor.ScaleY, csensor.ScaleZ);
             go.name = csensor.sensorid;
-            go.tag = "sensor";
-       //     go.GetComponent<Renderer>().material = mymat;
-       //     go.GetComponent<Renderer>().material.shader = myshader;
+            go.tag = "sensor"; //tag added for future use if need be
         }
     }
 
 
     public static void ReadSensorsXML()
     {
+        //XML file is loaded and the XmlDocument class is used.
         TextAsset textXML = (TextAsset)Resources.Load("sensorlist", typeof(TextAsset));
         XmlDocument xmldoc = new XmlDocument();
         xmldoc.LoadXml(textXML.text);
-        XmlNodeList transformList = xmldoc.GetElementsByTagName("Sensors");
+        XmlNodeList transformList = xmldoc.GetElementsByTagName("Sensors"); //get all the innertext
 
         foreach (XmlNode transformInfo in transformList)
         {
-
-            XmlNodeList transformcontent = transformInfo.ChildNodes;
+            XmlNodeList transformcontent = transformInfo.ChildNodes; //gets each "Sensor" tag's innertext
             foreach (XmlNode transformItems in transformcontent)
             {
-
-                XmlNodeList transformcontent2 = transformItems.ChildNodes;
-                SensorClass thissensor = new SensorClass();
+                XmlNodeList transformcontent2 = transformItems.ChildNodes; //gets tags within "Sensor"
+                SensorClass thissensor = new SensorClass(); //creating an instance of the Sensorclass class which will store the necessary values.
                 foreach (XmlNode transformItems2 in transformcontent2)
                 {
-              //      Debug.Log(transformItems2.InnerText);
+                    //appending values from the XML into the fields of the class
                     if (transformItems2.Name == "Name") { thissensor.sensorid = transformItems2.InnerText; }
                     if (transformItems2.Name == "PositionX") { thissensor.PositionX = float.Parse(transformItems2.InnerText); }
                     if (transformItems2.Name == "PositionY") { thissensor.PositionY = float.Parse(transformItems2.InnerText); }
@@ -67,12 +63,12 @@ public class ReadSensors : MonoBehaviour
                     if (transformItems2.Name == "ScaleY") { thissensor.ScaleY = float.Parse(transformItems2.InnerText); }
                     if (transformItems2.Name == "ScaleZ") { thissensor.ScaleZ = float.Parse(transformItems2.InnerText); }
                 }
-                ListofSensors.Add(thissensor);
+                ListofSensors.Add(thissensor); //the instance of the Sensorclass class with all information is appended into the list.
             }
         }
     }
 
-
+    //the getSensors function initiates the ReadSensorsXML function and returns the list of sensors with info obtained from the XML file.
     public static List<SensorClass> getSensors()
     {
         ReadSensorsXML();

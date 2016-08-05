@@ -5,16 +5,18 @@ using System.Xml;
 
 public class ReadDoors : MonoBehaviour
 {
-   
+
+    //initializes a list of DoorClass type
     public static List<DoorClass> ListofDoors = new List<DoorClass>();
+    //initializes a list of Wall type
     public static List<Wall> ListofWalls = new List<Wall>();
 
     void Start()
-    //gets the list of doors, loads a prefab and calls function to instantiate doors
+    //gets the list of doors and walls separately, loads a prefab and calls function to instantiate doors
     {
         object[] thisarray = getDoors();
 
-        //TYPECASTING
+        //Typecasting
         object doors = thisarray[0];
         List<DoorClass> DoorList;
         DoorList = (List<DoorClass>)doors;
@@ -29,7 +31,7 @@ public class ReadDoors : MonoBehaviour
         InstantiateWalls(mycube, WallsList);
     }
 
-
+    //function InstantiateDoors has arguments of the prefab and the list of doors, and instantiates the doors in the list
     public static void InstantiateDoors(GameObject doorprefab, List<DoorClass> DoorList)
     {
         GameObject emptyd = new GameObject("doors");
@@ -37,14 +39,14 @@ public class ReadDoors : MonoBehaviour
         {
             var cdoor = DoorList[doorcount];
             GameObject go = Instantiate(doorprefab) as GameObject;
-            go.transform.parent = emptyd.transform;
+            go.transform.parent = emptyd.transform; //all doors parented under "Doors" GameObject
             go.transform.position = new Vector3(cdoor.PositionXd, cdoor.PositionYd, cdoor.PositionZd);
             go.transform.localScale = new Vector3(cdoor.ScaleXd, cdoor.ScaleYd, cdoor.ScaleZd);
             go.name = cdoor.doorid;
-            go.tag = "door";
         }
     }
 
+    //function InstantiateWalls has arguments of the prefab and the list of walls, and instantiates the walls in the list
     public static void InstantiateWalls(GameObject doorprefab, List<Wall> WallsList)
     {
         GameObject emptyw = new GameObject("walls");
@@ -52,73 +54,78 @@ public class ReadDoors : MonoBehaviour
         {
             var cwall = WallsList[wallcount];
             GameObject go = Instantiate(doorprefab) as GameObject;
-            go.transform.parent = emptyw.transform;
+            go.transform.parent = emptyw.transform; //all walls parented under "Walls" GameObject
             go.transform.position = new Vector3(cwall.PositionX, cwall.PositionY, cwall.PositionZ);
             go.transform.localScale = new Vector3(cwall.ScaleX, cwall.ScaleY, cwall.ScaleZ);
-            go.tag = "wall";
         }
     }
 
 
     public static void ReadDoorsXML()
     {
+        //XML file is loaded and the XmlDocument class is used
         TextAsset textXML = (TextAsset)Resources.Load("doorlist", typeof(TextAsset));
         XmlDocument xmldoc = new XmlDocument();
         xmldoc.LoadXml(textXML.text);
-        XmlNodeList transformList = xmldoc.GetElementsByTagName("doors");
 
+        XmlNodeList transformList = xmldoc.GetElementsByTagName("Environment"); //get all the innertext
         foreach (XmlNode transformInfo in transformList)
         {
-            if (transformInfo.Name == "Doors")
+            XmlNodeList transformcontent = transformInfo.ChildNodes; //gets tags inside Environment (Doors, Walls)
+            foreach (XmlNode transformItems in transformcontent)
             {
-                XmlNodeList transformcontent = transformInfo.ChildNodes;
-                DoorClass thisdoor = new DoorClass();
-                foreach (XmlNode transformItems in transformcontent)
+                if (transformItems.Name == "Doors") //doors information will be added into instances of Doorclass class
                 {
-                    if (transformItems.Name == "Door")
+                    XmlNodeList transformcontent1 = transformItems.ChildNodes;
+                    foreach (XmlNode transformItems1 in transformcontent1)
                     {
-                        XmlNodeList transformcontent2 = transformItems.ChildNodes;
-                        foreach (XmlNode transformItems2 in transformcontent2)
+                        if (transformItems1.Name == "Door")
                         {
-                          //  Debug.Log(transformItems2.InnerText);
-                            if (transformItems2.Name == "Name") { thisdoor.doorid = transformItems2.InnerText; }
-                            if (transformItems2.Name == "PositionX") { thisdoor.PositionXd = float.Parse(transformItems2.InnerText); }
-                            if (transformItems2.Name == "PositionY") { thisdoor.PositionYd = float.Parse(transformItems2.InnerText); }
-                            if (transformItems2.Name == "PositionZ") { thisdoor.PositionZd = float.Parse(transformItems2.InnerText); }
-                            if (transformItems2.Name == "ScaleX") { thisdoor.ScaleXd = float.Parse(transformItems2.InnerText); }
-                            if (transformItems2.Name == "ScaleY") { thisdoor.ScaleYd = float.Parse(transformItems2.InnerText); }
-                            if (transformItems2.Name == "ScaleZ") { thisdoor.ScaleZd = float.Parse(transformItems2.InnerText); }
+                            XmlNodeList transformcontent2 = transformItems1.ChildNodes;
+                            DoorClass thisdoor = new DoorClass();
+                            foreach (XmlNode transformItems2 in transformcontent2)
+                            {
+                                if (transformItems2.Name == "Name") { thisdoor.doorid = transformItems2.InnerText; }
+                                if (transformItems2.Name == "PositionX") { thisdoor.PositionXd = float.Parse(transformItems2.InnerText); }
+                                if (transformItems2.Name == "PositionY") { thisdoor.PositionYd = float.Parse(transformItems2.InnerText); }
+                                if (transformItems2.Name == "PositionZ") { thisdoor.PositionZd = float.Parse(transformItems2.InnerText); }
+                                if (transformItems2.Name == "ScaleX") { thisdoor.ScaleXd = float.Parse(transformItems2.InnerText); }
+                                if (transformItems2.Name == "ScaleY") { thisdoor.ScaleYd = float.Parse(transformItems2.InnerText); }
+                                if (transformItems2.Name == "ScaleZ") { thisdoor.ScaleZd = float.Parse(transformItems2.InnerText); }
+                            }
+                            ListofDoors.Add(thisdoor);
                         }
                     }
                 }
-                ListofDoors.Add(thisdoor);
-            }
-            if (transformInfo.Name == "Walls")
-            {
-                XmlNodeList transformcontent = transformInfo.ChildNodes;
-                foreach (XmlNode transformItems in transformcontent)
+
+                if (transformItems.Name == "Walls") //walls information will be added into instances of Wall class
                 {
-                    if (transformItems.Name == "Wall")
+                    XmlNodeList transformcontent1 = transformItems.ChildNodes;
+                    foreach (XmlNode transformItems1 in transformcontent1)
                     {
-                        XmlNodeList transformcontent2 = transformItems.ChildNodes;
-                        Wall thiswall = new Wall();
-                        foreach (XmlNode transformItems2 in transformcontent2)
+                        if (transformItems1.Name == "Wall")
                         {
-                         //   Debug.Log(transformItems2.InnerText);
-                            if (transformItems2.Name == "PositionX") { thiswall.PositionX = float.Parse(transformItems2.InnerText); }
-                            if (transformItems2.Name == "PositionY") { thiswall.PositionY = float.Parse(transformItems2.InnerText); }
-                            if (transformItems2.Name == "PositionZ") { thiswall.PositionZ = float.Parse(transformItems2.InnerText); }
-                            if (transformItems2.Name == "ScaleX") { thiswall.ScaleX = float.Parse(transformItems2.InnerText); }
-                            if (transformItems2.Name == "ScaleY") { thiswall.ScaleY = float.Parse(transformItems2.InnerText); }
-                            if (transformItems2.Name == "ScaleZ") { thiswall.ScaleZ = float.Parse(transformItems2.InnerText); }
+                            XmlNodeList transformcontent2 = transformItems1.ChildNodes;
+                            Wall thiswall = new Wall();
+                            foreach (XmlNode transformItems2 in transformcontent2)
+                            {
+                                if (transformItems2.Name == "PositionX") { thiswall.PositionX = float.Parse(transformItems2.InnerText); }
+                                if (transformItems2.Name == "PositionY") { thiswall.PositionY = float.Parse(transformItems2.InnerText); }
+                                if (transformItems2.Name == "PositionZ") { thiswall.PositionZ = float.Parse(transformItems2.InnerText); }
+                                if (transformItems2.Name == "ScaleX") { thiswall.ScaleX = float.Parse(transformItems2.InnerText); }
+                                if (transformItems2.Name == "ScaleY") { thiswall.ScaleY = float.Parse(transformItems2.InnerText); }
+                                if (transformItems2.Name == "ScaleZ") { thiswall.ScaleZ = float.Parse(transformItems2.InnerText); }
+                            }
+                            ListofWalls.Add(thiswall);
                         }
-                        ListofWalls.Add(thiswall);
                     }
                 }
             }
         }
     }
 
+    //the getDoors function initiates the ReadDoorsXML function and returns a list of doors and a list of walls with info obtained from the XML file.
+    //the two lists are stored in an object array for the return statement, and are typecasted in the Start function
     public static object[] getDoors()
     {
         ReadDoorsXML();

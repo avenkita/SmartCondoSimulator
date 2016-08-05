@@ -3,7 +3,6 @@ using System.Xml.Serialization;
 
 //A class that goes along with ReadWalls.cs
 
-
 public class Wall
 {
     public string Name { set; get; }
@@ -18,9 +17,4 @@ public class Wall
     public float RotateZ { set; get; }
     public string roomid { set; get; }
 
-
- //   public float SwitchRotationY { set; get; }
- //   public float SwitchPositionX { set; get; }
- //   public float SwitchPositionY { set; get; }
- //   public float SwitchPositionZ { set; get; }
 }

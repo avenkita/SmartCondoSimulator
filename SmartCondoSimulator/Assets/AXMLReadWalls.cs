@@ -4,12 +4,9 @@ using System.Collections.Generic; //this is where the List<T>() class comes from
 using System.Xml;
 
 
-//Code to read Alexandr's first XML file (not SmartCondo, it is called "simulationWorld.xml") and instantite just the walls.
+//Code to read Alexandr's first XML file (it describes a space which is not the SmartCondo, it is called "simulationWorld.xml") and instantite just the walls.
 //AXML.cs goes with this code.
 //Code only reads XML, doesn't write a new one.
-
-
-//what was AXMLwallsinfo.xml used for? is it still being used? (look at the load in the AXMLreadwalls function)
 
 public class AXMLReadWalls : MonoBehaviour
 {
@@ -41,24 +38,25 @@ public class AXMLReadWalls : MonoBehaviour
             //this if statement evaluates walls which are diagonal (not constant in both x and y)
             if ((xscale > 0) && (zscale > 0))
             {
-                float length = Mathf.Sqrt(Mathf.Pow(xscale, 2) + Mathf.Pow(zscale, 2));
-                angle = Mathf.Atan((cw.Zvalue1 - cw.Zvalue2) / (cw.Xvalue1 - cw.Xvalue2)) * 180 / Mathf.PI;
-                go.transform.Rotate(0f, -angle, 0f); //rotation properties are limited!!!! CHECK IF ROTATION IS PROPER, 42.2 WRT X OR Z?
-                xscale = length;
+                float length = Mathf.Sqrt(Mathf.Pow(xscale, 2) + Mathf.Pow(zscale, 2)); //use Pythagorus for finding length of the hypotenuse
+                angle = Mathf.Atan((cw.Zvalue1 - cw.Zvalue2) / (cw.Xvalue1 - cw.Xvalue2)) * 180 / Mathf.PI; //finding the angle between the two walls
+                go.transform.Rotate(0f, -angle, 0f); //rotation properties can be tricky, but -angle works for some reason
+                //wall is created with xscale as length and zscale as thickness, then rotated in y.
+                xscale = length; 
                 zscale = 1;
             }
-            else
+            else //if the wall is constant in either x or y
             {
+                //because walls are represented as lines, if they are constant in one direction, they will have a thickness in that direction.
                 if (xscale == 0) { xscale = 1; }
                 if (zscale == 0) { zscale = 1; }
                 angle = 0f;
             }
 
+            //taking the computed information and putting it into the transform for instantiation
             go.transform.position = new Vector3(xposition, 12f, zposition);
             go.transform.localScale = new Vector3(xscale, 24f, zscale);
-            string currentname = (wallnumber + 1).ToString();
-            go.name = currentname;
-
+            go.name = (wallnumber + 1).ToString(); //wall is named in the hierarchy
         }
     }
 

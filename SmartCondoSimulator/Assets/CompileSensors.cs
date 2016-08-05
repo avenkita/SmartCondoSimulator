@@ -4,38 +4,43 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Text;
 
-//A code to read Alexandr's SmartCondo XML, instantiate the sensors alone, and compile sensor info into a Unity-compatible form
+//A code to read Alexandr's SmartCondo XML, get information about the sensors alone, and compile sensor info into a Unity-compatible form
 
 public class CompileSensors : MonoBehaviour {
+
+    //initializes a list of SensorClass type
     public static List<SensorClass> ListofSensors = new List<SensorClass>();
 
     public static void ReadSensors()
     {
+        //XML file is loaded and the XmlDocument class is used.
         TextAsset textXML = (TextAsset)Resources.Load("simulationWorldSC", typeof(TextAsset));
         XmlDocument xml = new XmlDocument();
         xml.LoadXml(textXML.text);
         XmlNodeList transformList = xml.GetElementsByTagName("simulatedworld");
  
 
-        foreach (XmlNode transformInfo in transformList) //has just the simulated world tag!
+        foreach (XmlNode transformInfo in transformList) //has just the simulated world tag
         {
-            XmlNodeList transformcontent = transformInfo.ChildNodes; //gets the tags inside the simulatedworld tag (rooms)
+            XmlNodeList transformcontent = transformInfo.ChildNodes; //gets the tags inside the simulatedworld tag
             foreach (XmlNode transformItems in transformcontent)
             {
+                //only the "sensors" tag will be found
                 if (transformItems.Name == "actions" || transformItems.Name == "agents" || transformItems.Name == "locations" || transformItems.Name == "rooms" || transformItems.Name == "obstacles") { continue; }
-                XmlNodeList transformcontent2 = transformItems.ChildNodes; //gets the tags inside the rooms tag (room)
+                XmlNodeList transformcontent2 = transformItems.ChildNodes; //gets the tags inside the sensors tag (sensor)
                 foreach (XmlNode transformItems2 in transformcontent2)
                 {
-                    SensorClass SCsensors = new SensorClass();
-                    XmlNodeList transformcontent3 = transformItems2.ChildNodes; //gets the tags inside the room tag (roomid and wall)
+                    SensorClass SCsensors = new SensorClass(); //creates a new instance of SensorClass class
+                    XmlNodeList transformcontent3 = transformItems2.ChildNodes; //gets the tags inside the sensor tag
                     foreach (XmlNode transformItems3 in transformcontent3)
                     {
+                        //append all info to the class
                         if (transformItems3.Name == "id") { SCsensors.sensorid = transformItems3.InnerText; }
                         if (transformItems3.Name == "type") { SCsensors.sensortype = transformItems3.InnerText; }
                         if (transformItems3.Name == "radius") { SCsensors.radius = float.Parse(transformItems3.InnerText); }
                         if (transformItems3.Name == "point")
                         {
-                            XmlNodeList transformcontent4 = transformItems3.ChildNodes;
+                            XmlNodeList transformcontent4 = transformItems3.ChildNodes; //gets the tags inside the point tag (xcoord and ycoord)
                             foreach (XmlNode transformItems4 in transformcontent4)
                             {
                                 if (transformItems4.Name == "xcoord") { SCsensors.xcoord = float.Parse(transformItems4.InnerText); }
@@ -43,12 +48,13 @@ public class CompileSensors : MonoBehaviour {
                             }
                         }
                     }
-                    ListofSensors.Add(SCsensors);
+                    ListofSensors.Add(SCsensors); //the instance of the SensorClass class with all information about the sensor appended into the list.
                 }
             }
         }
     }
 
+    //the getSensors function initiates the ReadSensors function and returns the list of sensors
     static List<SensorClass> getSensors()
     {
         ReadSensors();
@@ -57,12 +63,16 @@ public class CompileSensors : MonoBehaviour {
 
     void Start()
     {
+        //instance of XmlTextWriter is created. File will load into Assets\Resources
         XmlTextWriter writer = new XmlTextWriter("C:\\Users\\Aishwarya\\Desktop\\SmartCondo\\SmartCondoSimulator\\SmartCondoSimulator\\Assets\\Resources\\sensorlist.xml", Encoding.UTF8);
         writer.WriteStartElement("Sensors");
-        List<SensorClass> SensorsList = getSensors();
-        for (int sensorcount = 0; sensorcount < SensorsList.Count; sensorcount++)
+
+        List<SensorClass> SensorsList = getSensors(); //SensorsList is returned by the getSensors function
+
+        for (int sensorcount = 0; sensorcount < SensorsList.Count; sensorcount++) //loops through all sensors in sensorslist
         {
             var cs = SensorsList[sensorcount];
+            //Writing into the XML
             writer.Formatting = Formatting.Indented;
             writer.WriteStartElement("Sensor");
             writer.WriteStartElement("Name"); writer.WriteString(cs.sensorid); writer.WriteEndElement();
@@ -75,7 +85,7 @@ public class CompileSensors : MonoBehaviour {
             writer.WriteStartElement("ScaleZ"); writer.WriteString(((cs.radius)*2).ToString()); writer.WriteEndElement();
             writer.WriteEndElement();
         }
-        writer.WriteEndElement();
-        writer.Close();
+        writer.WriteEndElement(); //end "Sensors"
+        writer.Close(); //close Writer just in case there's a reading component.
     }
 }
