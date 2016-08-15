@@ -21,20 +21,14 @@ public class SmartCondoWalls : MonoBehaviour
         //WallsList is returned by the getWalls function
         List<SCWalls> WallsList = getWalls();
 
-        //prefab is loaded
-        GameObject mycube = Resources.Load("Wallprefab") as GameObject;
-
         //instance of XmlTextWriter is created. File will load into Assets\Resources
         XmlTextWriter writer = new XmlTextWriter("C:\\Users\\Aishwarya\\Desktop\\SmartCondoSimulator\\SmartCondoSimulator\\SmartCondoSimulator\\Assets\\Resources\\simulationWorldSCwritten.xml", Encoding.UTF8);
         writer.WriteStartElement("Walls");
-        GameObject empty = new GameObject("SC"); //helps in parenting in the hierarchy
 
         for (int wallnumber = 0; wallnumber < WallsList.Count; wallnumber++) //loops through all walls in wallslist
         {
             var cw = WallsList[wallnumber];
             if (cw == null) { continue; } //if the wall has a door, it is set to null. This statement avoids a NullReferenceException.
-            GameObject go = Instantiate(mycube) as GameObject;
-            go.transform.parent = empty.transform; //all walls parented under SC
             //for position, the mean of the two coordinate values is taken
             //for scale, the distance between the two coordinates is taken
             float xposition = (cw.Xcoord1 + cw.Xcoord2) / 2;
