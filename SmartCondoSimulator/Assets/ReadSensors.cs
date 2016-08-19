@@ -15,15 +15,16 @@ public class ReadSensors : MonoBehaviour
         //gets the list of sensors, loads a prefab and calls function to instantiate sensors
     {
         List<SensorClass> SensorList = getSensors();
-        GameObject mysensor = Resources.Load("Spheresensor") as GameObject;
+        GameObject mysensor = Resources.Load("Sphere") as GameObject;
         InstantiateSensors(mysensor, SensorList);
-    }
-
+    }   
    
     //function InstantiateSensors has arguments of the prefab and the list of sensors, and instantiates the sensors in the list
     public static void InstantiateSensors(GameObject sensorprefab, List<SensorClass> SensorList)
     {
-        GameObject emptys = new GameObject("Sensors");
+        GameObject emptys = new GameObject("Sensors"); //parenting
+        Material newMat = Resources.Load("thismat", typeof(Material)) as Material; //loading a material which will be added to the prefabs so that their colors can be easily changed.
+
         for (int sensorcount = 0; sensorcount < SensorList.Count; sensorcount++)
         {
             var csensor = SensorList[sensorcount];
@@ -33,9 +34,12 @@ public class ReadSensors : MonoBehaviour
             go.transform.localScale = new Vector3(csensor.ScaleX, csensor.ScaleY, csensor.ScaleZ);
             go.name = csensor.sensorid;
             go.tag = "sensor"; //tag added for future use if need be
+            go.AddComponent<CapsuleTrigger>(); //adding CapsuleTrigger.cs as a component
+            go.GetComponent<Collider>().isTrigger = true; //enabling "Is Trigger" within the collider section
+            go.GetComponent<Renderer>().material = newMat; //assigning the material  
+            go.GetComponent<Renderer>().material.color = Color.red; 
         }
     }
-
 
     public static void ReadSensorsXML()
     {
@@ -74,6 +78,7 @@ public class ReadSensors : MonoBehaviour
         ReadSensorsXML();
         return ListofSensors;
     }
+
 }
 
 

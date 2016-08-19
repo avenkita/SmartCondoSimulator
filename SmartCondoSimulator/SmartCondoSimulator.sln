@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCondoSimulator.CSharp.Plugins", "SmartCondoSimulator.CSharp.Plugins.csproj", "{4BEEF064-0FF4-52D5-2F35-FCAE6CB97175}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCondoSimulator.CSharp", "SmartCondoSimulator.CSharp.csproj", "{DCB56D15-6BB9-68FF-0220-F9E816CDC8EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCondoSimulator.CSharp.Editor", "SmartCondoSimulator.CSharp.Editor.csproj", "{FB31A6B2-3B6E-6AF3-C8FA-09C8ACC2B054}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +13,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BEEF064-0FF4-52D5-2F35-FCAE6CB97175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BEEF064-0FF4-52D5-2F35-FCAE6CB97175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BEEF064-0FF4-52D5-2F35-FCAE6CB97175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BEEF064-0FF4-52D5-2F35-FCAE6CB97175}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DCB56D15-6BB9-68FF-0220-F9E816CDC8EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DCB56D15-6BB9-68FF-0220-F9E816CDC8EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCB56D15-6BB9-68FF-0220-F9E816CDC8EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCB56D15-6BB9-68FF-0220-F9E816CDC8EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB31A6B2-3B6E-6AF3-C8FA-09C8ACC2B054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB31A6B2-3B6E-6AF3-C8FA-09C8ACC2B054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB31A6B2-3B6E-6AF3-C8FA-09C8ACC2B054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB31A6B2-3B6E-6AF3-C8FA-09C8ACC2B054}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
