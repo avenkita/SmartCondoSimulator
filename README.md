@@ -1,5 +1,19 @@
 # SmartCondoSimulator
 
+##SmartCondo details
+
+The Smart Condo is a research facility located in the Edmonton Clinic Health Academy. It is used to
+
+simulate home visits, allowing healthcare professionals to increase their understanding of assisted living
+
+devices. The condo features intelligent technologies, such as sensors and smart appliances, providing
+
+opportunities for researchers and practitioners to learn how to communicate and collaborate with
+
+patients living in intelligent homes.
+
+Visit http://www.hserc.ualberta.ca/Resources/Spaces/SmartCondo.aspx
+
 ##Contents
 
 * Assets Folder (Empty. Not used.)
@@ -9,6 +23,12 @@
 * README.md File
 * simulationWorld_picture.jpg File (Image of Alexandr's 2D SmartCondo simulation)
 * 2016-07-04-010720-sim.log File (Alexandr's simulation log. Not used, but would have been used for avatar and sensor simulation)
+
+##What you need
+
+Unity3d (version 5.3.0)
+Microsoft Visual Studio (or you can use MonoDevelop, which comes with Unity)
+**Important** please read through this whole file, and especially the last section with "Problem areas and what to be wary of"!
 
 ##SmartCondoSimulator Unity Project
 
@@ -41,12 +61,26 @@ Please see XMLguide.txt in the main project folder! I have described what all th
 
 ###Layout of Scenes and description of codes
 
-The scene "InstantiateSC.unity" should be run. In it, there are a few empty GameObjects (go) with scripts attached to them. Grey font means the go is disabled, which means that whatever is in the script (Start and Update and a few other functions) will be disabled. In Unity, it is possible to attach more than one script to a GameObject. For a script to work, it has to be attached to a go, or called from a script which is attached to a go. I just named the GameObjects the same as what their script names were to help me run the scene with different combinations of scripts. The capsule GameObject has a rigidbody component and is kinematic. The invisible floor is a flattened cube because the capsule was unnecessarily falling without it. When the scene is run (using the "play" button) the instantiated objects can be seen. The capsule can be moved around using the arrow keys and once it is in a sensor's area, the sensor will flash between translucent to yellow materials. Pressing the play button will stop the scene's run. Note that for the capsule to be controlled, you must be in the "Game" view (not "Scene" view) and must click on the game screen before moving if you had been working on some other view or folder beforehand.
+The scene "InstantiateSC.unity" should be run. In it, there are a few empty GameObjects (go) with scripts attached to them. Grey font means the go is disabled, which means that whatever is in the script (Start and Update and a few other functions) will be disabled. In Unity, it is possible to attach more than one script to a GameObject. For a script to work, it has to be attached to a go, or called from a script which is attached to a go. I just named the GameObjects the same as what their script names were to help me run the scene with different combinations of scripts. The capsule GameObject has a rigidbody component and is kinematic. The invisible floor is a flattened cube because the capsule was unnecessarily falling without it. When the scene is run (using the "play" button) the instantiated objects can be seen. The capsule can be moved around using the arrow keys and once it is in a sensor's area, the sensor will flash between translucent to yellow materials. Pressing the play button will stop the scene's run. Note that for the capsule to be controlled, you must be in the "Game" view (not "Scene" view) and must click on the game screen before moving if you had been working on some other view or folder beforehand. 
+
+####Code List (Note that all codes have comments! Please see Problem areas and what to be wary of bullet 2 below for more information!!)
+* CompileWalls.cs - reads simulationWorldSC.xml and writes into simulationWorldSCwritten.xml (in Resources) the wall information according to Unity values
+* ReadWalls.cs - reads simulationWorldSCwritten.xml and instantiates walls with the correct dimensions
+* SCWalls.cs - a wall class with fields for wall dimensions and names
+* Wall.cs - another wall class with fields for wall dimensions and names
+* CompileDoors.cs - reads simulationWorldSC.xml and writes into doorlist.xml (in Resources) the door and wall (these are the two walls on either side of the door) information according to Unity values
+* ReadDoors.cs - reads doorlist.xml and instantiates walls and doors with the correct dimensions 
+* DoorClass.cs - a door class with fields for door dimensions and wall dimensions for the walls with doors in them
+* CompileSensors - reads simulationWorldSC.xml and writes into sensorlist.xml (in Resources) the sensor information according to Unity values
+* ReadSensors.cs - reads sensorlist.xml and instantiates sensors with the correct dimensions, and also adds some behaviours to them.
+* SensorClass.cs - a sensor class with fields for sensor dimensions, id's and names.
+* CapsuleTrigger.cs - a script attached to instantiated sensor which has sensor behaviour codes (OnTrigger functions)
 
 **###Problem areas and what to be wary of**
 
 * simulationWorldSC tree diagram is in the Resources folder and it will help us visualize the structure of simulationWorldSC.xml. The nested foreach loops work very specifically and if the code or the XML file is modified, it will not work properly and could lead to errors or NullReferenceExceptions.
 * **VERY IMPORTANT** Users/Aishwarya/Desktop
+* Unity can Load files or prefabs only from the Resources folder (as far as I know) using Resources.Load("stringfilename"). 
 * SmartCondo dimensions were from the XML file and correspond to Alexandr's simulation. The simulation is not accurate. The dimensions are 892 by 896 Unity units, whereas the actual SmartCondo is rectangular in shape and should be 10.6 by 6.3 units. 
 * The walls and heights are along the Unity Y axis. You will see that in the "Compile[Component]" codes, they are given values in the code itself (not from simulatedWorldSC.xml because that file defines the 2D space!). They need to be modified manually if changes are made in the code.
 
