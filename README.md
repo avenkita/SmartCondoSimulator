@@ -25,6 +25,11 @@
 * SmartCondo Scripts (no longer used: contains SmartCondo instantiation scripts based on previous versions of XMLs)
 * Standard Assets (not used but still saved: contains some Unity files)
 
+###How the project works
+
+The scene currently will instantiate walls, doors, door walls, and sensors from Alexandr's simulationWorldSC.xml file. For each component, there is a script called "Compile[component].cs" which will read simulationWorldSC.xml and extract all the tags relating to that component. Using foreach loops and ChildNodes, the code iterates through the tags (note that I saw suggestions online about using Linq and other methods of efficient XML reading, but I stayed with the looping method). The code compiles all the information for each instance of the component into a class. The list of all of the class objects is retreived in the same code, and after some mathematical computation regarding object size, position, etc., all the information is written into a new, Unity compatible XML file.
+
+
 ###XML file descriptions
 
 
