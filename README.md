@@ -2,16 +2,7 @@
 
 ##SmartCondo details
 
-The Smart Condo is a research facility located in the Edmonton Clinic Health Academy. It is used to
-
-simulate home visits, allowing healthcare professionals to increase their understanding of assisted living
-
-devices. The condo features intelligent technologies, such as sensors and smart appliances, providing
-
-opportunities for researchers and practitioners to learn how to communicate and collaborate with
-
-patients living in intelligent homes.
-
+The Smart Condo is a research facility located in the Edmonton Clinic Health Academy. It is used to simulate home visits, allowing healthcare professionals to increase their understanding of assisted living devices. The condo features intelligent technologies, such as sensors and smart appliances, providing opportunities for researchers and practitioners to learn how to communicate and collaborate with patients living in intelligent homes.
 Visit http://www.hserc.ualberta.ca/Resources/Spaces/SmartCondo.aspx
 
 ##Contents
@@ -79,7 +70,9 @@ The scene "InstantiateSC.unity" should be run. In it, there are a few empty Game
 **###Problem areas and what to be wary of**
 
 * simulationWorldSC tree diagram is in the Resources folder and it will help us visualize the structure of simulationWorldSC.xml. The nested foreach loops work very specifically and if the code or the XML file is modified, it will not work properly and could lead to errors or NullReferenceExceptions.
-* **VERY IMPORTANT** Users/Aishwarya/Desktop
+* **VERY IMPORTANT** 
+    * CompileWalls.cs Line 25, CompileDoors Line 28, and CompileSensors Line 67: TextWriter writes into specified file in directory! Make sure your directory location corresponds to your Resources folder in your computer!
+    * For the Read[Component].cs files, Unity can load a file FROM Resources in order to read it. So, the full directory location is not specified.
 * Unity can Load files or prefabs only from the Resources folder (as far as I know) using Resources.Load("stringfilename"). 
 * SmartCondo dimensions were from the XML file and correspond to Alexandr's simulation. The simulation is not accurate. The dimensions are 892 by 896 Unity units, whereas the actual SmartCondo is rectangular in shape and should be 10.6 by 6.3 units. 
 * The walls and heights are along the Unity Y axis. You will see that in the "Compile[Component]" codes, they are given values in the code itself (not from simulatedWorldSC.xml because that file defines the 2D space!). They need to be modified manually if changes are made in the code.
