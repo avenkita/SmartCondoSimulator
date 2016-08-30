@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-//Class that goes along with SmartCondoWalls.cs
+//Class that goes along with CompileWalls.cs
 //Has fields meant for reading XML with xcoord and ycoord tags
 
 

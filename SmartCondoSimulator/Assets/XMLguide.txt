@@ -1,4 +1,5 @@
-Descriptions of the XML files we have and what they consist of
+Descriptions of the XML files we have and what they consist of.
+XML marked with *** are the XMLs currently being used by the project (as of August 30)
 
 Walls.xml
 -Used in ReadWalls initially (not anymore)
@@ -17,20 +18,20 @@ simulationWorld.xml
 
 AXMLwallsinfo.xml
 -simulationWorld without any other tags except the wall tag
--used in AXMLwalls previously, but now with SmartCondoWalls.cs, the foreach loops can avoid all the other tags
+-used in AXMLwalls previously, but now with CompileWalls.cs, the foreach loops can avoid all the other tags
 
-simulationWorldSC.xml
+simulationWorldSC.xml ***
 -Alexandr's second XMl file
--Can be used in SmartCondoWalls.cs to instantiate SmartCondo walls and obstacles
+-Can be used in CompileWalls.cs to instantiate SmartCondo walls and obstacles
 
-simulationWorldSCwritten.xml
--This is the XML file that SmartCondoWalls.cs writes (in Unity-compatible form) with walls info
+simulationWorldSCwritten.xml ***
+-This is the XML file that CompileWalls.cs writes (in Unity-compatible form) with walls info
 -Note, the file is written into the Resources folder in Assets. When going to visual studio: Unity changed, click Reload. You may have to stop running the scene for it to show up.
 -No need to delete the file before running the scene again, it will automatically update it (with the same directory path)
 
-sensorlist.xml
+sensorlist.xml ***
 -This is the XML file which CompileSensors.cs writes into, and ReadSensors.cs reads to obtain the required information for Unity sensor instantiation.
 
-doorlist.xml
+doorlist.xml ***
 -This is the XML file which CompileDoors.cs writes into, and ReadDoors.cs will read to obtain the required information for Unity door instantiation.
 -Contains an "Environment" parent, which branches out into "Walls" and "Doors", and then "Wall" and "Door" respectively and their subtags.

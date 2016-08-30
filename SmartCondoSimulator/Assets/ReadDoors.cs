@@ -85,7 +85,7 @@ public class ReadDoors : MonoBehaviour
                             DoorClass thisdoor = new DoorClass();
                             foreach (XmlNode transformItems2 in transformcontent2)
                             {
-                                if (transformItems2.Name == "Name") { thisdoor.doorid = transformItems2.InnerText; }
+                                if (transformItems2.Name == "id") { thisdoor.doorid = transformItems2.InnerText; }
                                 if (transformItems2.Name == "PositionX") { thisdoor.PositionXd = float.Parse(transformItems2.InnerText); }
                                 if (transformItems2.Name == "PositionY") { thisdoor.PositionYd = float.Parse(transformItems2.InnerText); }
                                 if (transformItems2.Name == "PositionZ") { thisdoor.PositionZd = float.Parse(transformItems2.InnerText); }

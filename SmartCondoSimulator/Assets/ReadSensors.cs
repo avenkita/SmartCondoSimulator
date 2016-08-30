@@ -4,19 +4,23 @@ using System.Collections.Generic;
 using System.Xml;
 
 //A code which can read the XML format which has Unity compatible values and instantiate the sensor (sensorlist.xml)
+//Sensor behaviours are also added (sphere collider, and the is trigger box on the collider is checked through the code)
 
 
 public class ReadSensors : MonoBehaviour
 {
     //initializes a list of SensorClass type
     public static List<SensorClass> ListofSensors = new List<SensorClass>();
+    public static Color colorvar = Color.white; //initialize a color which is to be assigned to the sensor
+
 
     void Start()
         //gets the list of sensors, loads a prefab and calls function to instantiate sensors
     {
         List<SensorClass> SensorList = getSensors();
-        GameObject mysensor = Resources.Load("Sphere") as GameObject;
+        GameObject mysensor = Resources.Load("ConeScaled") as GameObject;
         InstantiateSensors(mysensor, SensorList);
+        
     }   
    
     //function InstantiateSensors has arguments of the prefab and the list of sensors, and instantiates the sensors in the list
@@ -34,10 +38,14 @@ public class ReadSensors : MonoBehaviour
             go.transform.localScale = new Vector3(csensor.ScaleX, csensor.ScaleY, csensor.ScaleZ);
             go.name = csensor.sensorid;
             go.tag = "sensor"; //tag added for future use if need be
-            go.AddComponent<CapsuleTrigger>(); //adding CapsuleTrigger.cs as a component
+
+            go.AddComponent<CapsuleTrigger>(); //adding CapsuleTrigger.cs script as a component
+            go.AddComponent<SphereCollider>(); //sphere collider is added (tried to use Mesh colliders but encountered a lot of problems
             go.GetComponent<Collider>().isTrigger = true; //enabling "Is Trigger" within the collider section
-            go.GetComponent<Renderer>().material = newMat; //assigning the material  
-            go.GetComponent<Renderer>().material.color = Color.red; 
+
+            go.GetComponent<Renderer>().material = newMat; //assigning the material 
+            colorvar.a = 0.1f; //this is so that the sensor is instatiated as translucent. Alpha component of color determines transparency
+            go.GetComponent<Renderer>().material.color = colorvar; 
         }
     }
 

@@ -69,10 +69,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AXML.cs" />
-    <Compile Include="Assets\AXMLReadWalls.cs" />
+    <Compile Include="Assets\CapsuleTrigger.cs" />
     <Compile Include="Assets\CompileDoors.cs" />
     <Compile Include="Assets\CompileSensors.cs" />
+    <Compile Include="Assets\CompileWalls.cs" />
     <Compile Include="Assets\DoorClass.cs" />
     <Compile Include="Assets\Practice\Destroythis.cs" />
     <Compile Include="Assets\Practice\Printingscript.cs" />
@@ -81,13 +81,14 @@
     <Compile Include="Assets\ReadSensors.cs" />
     <Compile Include="Assets\ReadWalls.cs" />
     <Compile Include="Assets\SCWalls.cs" />
-    <Compile Include="Assets\Sensor Scripts\CapsuleTrigger.cs" />
     <Compile Include="Assets\Sensor Scripts\CharacterController2.cs" />
+    <Compile Include="Assets\Sensor Scripts\ConeMeshCreate.cs" />
     <Compile Include="Assets\Sensor Scripts\camMouseLook.cs" />
     <Compile Include="Assets\Sensor Scripts\cubemove.cs" />
     <Compile Include="Assets\SensorClass.cs" />
-    <Compile Include="Assets\SmartCondo.cs" />
-    <Compile Include="Assets\SmartCondoWalls.cs" />
+    <Compile Include="Assets\SmartCondo Scripts\AXML.cs" />
+    <Compile Include="Assets\SmartCondo Scripts\AXMLReadWalls.cs" />
+    <Compile Include="Assets\SmartCondo Scripts\SmartCondo.cs" />
     <Compile Include="Assets\Wall.cs" />
   </ItemGroup>
   <ItemGroup>

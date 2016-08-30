@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//this code is attached to the capsule
+//obtained from an online source
+//allows the capsule to be moved using the up, down, left and right keyboard keys.
+
+
 public class CharacterController2 : MonoBehaviour
 {
     public float speed = 10.0f;

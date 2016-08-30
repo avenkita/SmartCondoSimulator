@@ -64,7 +64,7 @@ public class CompileSensors : MonoBehaviour {
     void Start()
     {
         //instance of XmlTextWriter is created. File will load into Assets\Resources
-        XmlTextWriter writer = new XmlTextWriter("C:\\Users\\Aishwarya\\Desktop\\SmartCondo\\SmartCondoSimulator\\SmartCondoSimulator\\Assets\\Resources\\sensorlist.xml", Encoding.UTF8);
+        XmlTextWriter writer = new XmlTextWriter("C:\\Users\\Aishwarya\\Desktop\\SmartCondoSimulator\\SmartCondoSimulator\\SmartCondoSimulator\\Assets\\Resources\\sensorlist.xml", Encoding.UTF8);
         writer.WriteStartElement("Sensors");
 
         List<SensorClass> SensorsList = getSensors(); //SensorsList is returned by the getSensors function
@@ -73,16 +73,19 @@ public class CompileSensors : MonoBehaviour {
         {
             var cs = SensorsList[sensorcount];
             //Writing into the XML
+            //Cone prafab obtained from an app called "3D Builder" in Windows. The cone was much bigger, so what I did was resize it so that the base (diameter) and height were approximately one Unity unit in length
+            //Then the object was put into Resources as a prefab
+            //To be one Unity unit long, the scale of the object itself was 0.02523847. This is why the radius values (Scale) obtained from Alexandr's XML are multiplied by the ratio.
             writer.Formatting = Formatting.Indented;
             writer.WriteStartElement("Sensor");
             writer.WriteStartElement("Name"); writer.WriteString(cs.sensorid); writer.WriteEndElement();
             writer.WriteStartElement("Type"); writer.WriteString(cs.sensortype); writer.WriteEndElement();
             writer.WriteStartElement("PositionX"); writer.WriteString(cs.ycoord.ToString()); writer.WriteEndElement();
-            writer.WriteStartElement("PositionY"); writer.WriteString("0"); writer.WriteEndElement();
+            writer.WriteStartElement("PositionY"); writer.WriteString("1"); writer.WriteEndElement();
             writer.WriteStartElement("PositionZ"); writer.WriteString(cs.xcoord.ToString()); writer.WriteEndElement();
-            writer.WriteStartElement("ScaleX"); writer.WriteString(((cs.radius)*2).ToString()); writer.WriteEndElement();
-            writer.WriteStartElement("ScaleY"); writer.WriteString("20"); writer.WriteEndElement();
-            writer.WriteStartElement("ScaleZ"); writer.WriteString(((cs.radius)*2).ToString()); writer.WriteEndElement();
+            writer.WriteStartElement("ScaleX"); writer.WriteString(((cs.radius)*2 * 0.02523847f).ToString()); writer.WriteEndElement();
+            writer.WriteStartElement("ScaleY"); writer.WriteString(((cs.radius)*2 * 0.02523847f).ToString()); writer.WriteEndElement();
+            writer.WriteStartElement("ScaleZ"); writer.WriteString("2"); writer.WriteEndElement();
             writer.WriteEndElement();
         }
         writer.WriteEndElement(); //end "Sensors"

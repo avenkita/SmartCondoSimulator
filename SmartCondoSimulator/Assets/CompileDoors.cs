@@ -10,17 +10,12 @@ using System.Linq;
 //REWRITE
 //A code which can read Alexandr's second XML file (SmartCondo), instantiate the doors and the walls which encompass them, and also write it into an XML file in the Unity-compatible format
 
-//NOTE code currently only works for walls either along the x or z axis, cannot compute diagonal doors!!
-//Door offset is either 20 units from the first point, or 20 unity from the second point
-
-//why error when transformItems5 loop was put around all the if's rather than just the first if? varflag probably
-
-//current problems
-//door walls from SmartCondoWalls.cs are still there! 8, 14, 15, 19 are not shown in the hierarchy but there are solid doors in the proper spots nevertheless
-//door heights
-//what to do about door XML? <-- trying to compile but it doesn't finish the wall writing. stops mid-tag
-
-    //doors are thin according to Alexandr's XML file, they can be wider as long as they don't do over the edges of the wall which encompasses them (if they do, the doors will instantiate but the new walls will be wonky
+//NOTE code currently only works for walls either along the x or z axis, cannot compute diagonal doors.
+//Door offset is either 20 units from the first point, or 20 unity from the second point. Check the image (simulationWorld_picture in Resources) for more information
+//Walls number 8, 14, 15, 19 have doors in them and are not shown in the Hierarchy under "Walls" but there are solid doors (11 where 8 was, 2 and 20 where 14 was, 1 where 15 was, 3 where 19 was) in the those spots nevertheless
+//Alexandr's simulation interface would detect the duplicated walls and delete them accordingly. Note that in the XML, each room has all the walls it needs, meaning overlapping rooms would have two instances of the wall in the same position.
+//door heights are as high as wall heights. There is no part of the wall above the door.
+//doors are thin according to Alexandr's XML file, they can be wider as long as they don't do over the edges of the wall which encompasses them (if they do, the doors will instantiate but the new walls will be wonky)
 
 public class CompileDoors : MonoBehaviour
 {
@@ -34,10 +29,6 @@ public class CompileDoors : MonoBehaviour
         writer.Formatting = Formatting.Indented;
         writer.WriteStartElement("Environment");
 
-        GameObject mycube = Resources.Load("Wallprefab") as GameObject; //prefab is loaded
-        GameObject empty = new GameObject("Doors"); //for parenting
-        GameObject emptyw = new GameObject("Walls"); //for parenting
-
         //WallsList is returned by the getWalls function
         List<DoorClass> WallsList = getWalls();
         //WallsList has instances of DoorClass
@@ -49,19 +40,13 @@ public class CompileDoors : MonoBehaviour
         {
             var dw = WallsList[doornumber];
 
-            GameObject go = Instantiate(mycube) as GameObject;
-            go.transform.parent = empty.transform;
-            go.transform.position = new Vector3(dw.PositionXd, 80, dw.PositionZd);
-            go.transform.localScale = new Vector3(dw.ScaleXd, 160, dw.ScaleZd);
-            go.name = dw.doorid;
-
             writer.WriteStartElement("Door");
             writer.WriteStartElement("id"); writer.WriteString(dw.doorid); writer.WriteEndElement();
             writer.WriteStartElement("PositionX"); writer.WriteString(dw.PositionXd.ToString()); writer.WriteEndElement();
-            writer.WriteStartElement("PositionY"); writer.WriteString("80"); writer.WriteEndElement();
+            writer.WriteStartElement("PositionY"); writer.WriteString("50"); writer.WriteEndElement();
             writer.WriteStartElement("PositionZ"); writer.WriteString(dw.PositionZd.ToString()); writer.WriteEndElement();
             writer.WriteStartElement("ScaleX"); writer.WriteString(dw.ScaleXd.ToString()); writer.WriteEndElement();
-            writer.WriteStartElement("ScaleY"); writer.WriteString("160"); writer.WriteEndElement();
+            writer.WriteStartElement("ScaleY"); writer.WriteString("100"); writer.WriteEndElement();
             writer.WriteStartElement("ScaleZ"); writer.WriteString(dw.ScaleZd.ToString()); writer.WriteEndElement();
             writer.WriteEndElement();
         }
@@ -73,38 +58,28 @@ public class CompileDoors : MonoBehaviour
         {
             var dw = WallsList[count];
 
-            GameObject Wall1 = Instantiate(mycube) as GameObject;
-            Wall1.transform.parent = emptyw.transform;
-            Wall1.transform.position = new Vector3(dw.PositionXw1, 80, dw.PositionZw1);
-            Wall1.transform.localScale = new Vector3(dw.ScaleXw1, 160, dw.ScaleZw1);
-
-            GameObject Wall2 = Instantiate(mycube) as GameObject;
-            Wall2.transform.parent = emptyw.transform;
-            Wall2.transform.position = new Vector3(dw.PositionXw2, 80, dw.PositionZw2);
-            Wall2.transform.localScale = new Vector3(dw.ScaleXw2, 160, dw.ScaleZw2); 
-
             writer.WriteStartElement("Wall");
             writer.WriteStartElement("PositionX"); writer.WriteString(dw.PositionXw1.ToString()); writer.WriteEndElement();
-            writer.WriteStartElement("PositionY"); writer.WriteString("80"); writer.WriteEndElement();
+            writer.WriteStartElement("PositionY"); writer.WriteString("50"); writer.WriteEndElement();
             writer.WriteStartElement("PositionZ"); writer.WriteString(dw.PositionZw1.ToString()); writer.WriteEndElement();
             writer.WriteStartElement("ScaleX"); writer.WriteString(dw.ScaleXw1.ToString()); writer.WriteEndElement();
-            writer.WriteStartElement("ScaleY"); writer.WriteString("160"); writer.WriteEndElement();
+            writer.WriteStartElement("ScaleY"); writer.WriteString("100"); writer.WriteEndElement();
             writer.WriteStartElement("ScaleZ"); writer.WriteString(dw.ScaleZw1.ToString()); writer.WriteEndElement();
             writer.WriteEndElement();
 
             writer.WriteStartElement("Wall");
             writer.WriteStartElement("PositionX"); writer.WriteString(dw.PositionXw2.ToString()); writer.WriteEndElement();
-            writer.WriteStartElement("PositionY"); writer.WriteString("80"); writer.WriteEndElement();
+            writer.WriteStartElement("PositionY"); writer.WriteString("50"); writer.WriteEndElement();
             writer.WriteStartElement("PositionZ"); writer.WriteString(dw.PositionZw2.ToString()); writer.WriteEndElement();
             writer.WriteStartElement("ScaleX"); writer.WriteString(dw.ScaleXw2.ToString()); writer.WriteEndElement();
-            writer.WriteStartElement("ScaleY"); writer.WriteString("160"); writer.WriteEndElement();
+            writer.WriteStartElement("ScaleY"); writer.WriteString("100"); writer.WriteEndElement();
             writer.WriteStartElement("ScaleZ"); writer.WriteString(dw.ScaleZw2.ToString()); writer.WriteEndElement();
             writer.WriteEndElement();
         }
         writer.WriteEndElement();
 
         writer.WriteEndElement(); //closing "Environment"
-        writer.Close(); //close writer instance
+        writer.Close(); //close writer instance. Will give errors if this is not done!
     }
 
 
