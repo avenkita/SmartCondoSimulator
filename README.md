@@ -68,7 +68,7 @@ The scene "InstantiateSC.unity" should be run. In it, there are a few empty Game
 * SensorClass.cs - a sensor class with fields for sensor dimensions, id's and names.
 * CapsuleTrigger.cs - a script attached to instantiated sensor which has sensor behaviour codes (OnTrigger functions)
 
-**###Problem areas and what to be wary of**
+##**Problem areas and what to be wary of**
 
 * simulationWorldSC tree diagram is in the Resources folder and it will help us visualize the structure of simulationWorldSC.xml. The nested foreach loops work very specifically and if the code or the XML file is modified, it will not work properly and could lead to errors or NullReferenceExceptions.
 * **VERY IMPORTANT**
