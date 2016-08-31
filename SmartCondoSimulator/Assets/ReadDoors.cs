@@ -34,7 +34,7 @@ public class ReadDoors : MonoBehaviour
     //function InstantiateDoors has arguments of the prefab and the list of doors, and instantiates the doors in the list
     public static void InstantiateDoors(GameObject doorprefab, List<DoorClass> DoorList)
     {
-        GameObject emptyd = new GameObject("doors");
+        GameObject emptyd = new GameObject("Doors");
         for (int doorcount = 0; doorcount < DoorList.Count; doorcount++)
         {
             var cdoor = DoorList[doorcount];
@@ -49,7 +49,7 @@ public class ReadDoors : MonoBehaviour
     //function InstantiateWalls has arguments of the prefab and the list of walls, and instantiates the walls in the list
     public static void InstantiateWalls(GameObject doorprefab, List<Wall> WallsList)
     {
-        GameObject emptyw = new GameObject("walls");
+        GameObject emptyw = new GameObject("Walls beside Doors");
         for (int wallcount = 0; wallcount < WallsList.Count; wallcount++)
         {
             var cwall = WallsList[wallcount];
