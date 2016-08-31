@@ -79,4 +79,9 @@ The scene "InstantiateSC.unity" should be run. In it, there are a few empty Game
 * The walls and heights are along the Unity Y axis. You will see that in the "Compile[Component]" codes, they are given values in the code itself (not from simulatedWorldSC.xml because that file defines the 2D space!). They need to be modified manually if changes are made in the code.
 
 
+put blueprint in
+read doors comments 
+when to use compile versus read files.
+send victor zip files of stuff
+
 
